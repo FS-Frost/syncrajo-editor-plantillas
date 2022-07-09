@@ -27,6 +27,9 @@ jobs:
             - name: Change base-tag in index.html from / to syncrajo-editor-plantillas
               run: sed -i 's/<base href="\/" \/>/<base href="\/syncrajo-editor-plantillas\/" \/>/g' public/index.html
 
+            - name: Generate build info
+              run: echo "{\"sha\": \"${{ github.sha }}\", \"ref\": \"${{ github.ref_name }}\"}" >> public/build-info.json
+
             - name: Deploy 🚀
               uses: JamesIves/github-pages-deploy-action@4.1.7
               with:
