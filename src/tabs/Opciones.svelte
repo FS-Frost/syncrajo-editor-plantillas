@@ -130,15 +130,27 @@
     function limpiar() {
         plantilla = newPlantilla();
     }
+
+    function verPlantillaDesplegada() {
+        const url = "http://www.syncrajo.net/2013/01/clannad-bd.html";
+        let element = document.createElement("a");
+        element.setAttribute("href", url);
+        element.setAttribute("target", "_blank");
+        element.click();
+    }
 </script>
 
 <div class="opciones">
-    <button class="button is-info" on:click={() => generarPlantilla()}
-        >Generar plantilla</button
+    <button
+        class="button is-info"
+        title="Generar el código HTML y lo copia al portapapeles"
+        on:click={() => generarPlantilla()}>Generar</button
     >
 
-    <button class="button is-info" on:click={() => fileButton.click()}
-        >Abrir plantilla</button
+    <button
+        class="button is-info"
+        title="Abrir plantilla local"
+        on:click={() => fileButton.click()}>Abrir</button
     >
     <input
         class="is-hidden"
@@ -148,16 +160,29 @@
         on:change={() => cargarPlantilla()}
     />
 
-    <button class="button is-info" on:click={() => guardarComo()}
-        >Guardar como</button
+    <button
+        class="button is-info"
+        title="Guardar plantilla en formato YAML"
+        on:click={() => guardarComo()}>Guardar</button
     >
 
-    <button class="button is-info" on:click={() => cargarEjemplo()}
-        >Cargar ejemplo</button
+    <button
+        class="button is-info"
+        title="Cargar plantilla de ejemplo"
+        on:click={() => cargarEjemplo()}>Cargar ejemplo</button
     >
 
-    <button class="button is-danger" on:click={() => limpiar()}
-        >Limpiar datos</button
+    <button
+        class="button is-danger"
+        title="Reiniciar todos los campos"
+        on:click={() => limpiar()}>Limpiar</button
+    >
+
+    <button
+        class="button is-info"
+        title="Ver una plantilla ya desplegada como HTML"
+        on:click={() => verPlantillaDesplegada()}
+        >Ver una plantilla en SyncRajo</button
     >
 </div>
 
