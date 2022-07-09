@@ -23,7 +23,7 @@
 
     <!-- Descripción -->
     <div class="field">
-        <label class="label" for="">Descripción</label>
+        <label class="label" for="">Sinopsis</label>
         <div class="control">
             <textarea class="textarea" bind:value={datos.Descripcion} />
         </div>
