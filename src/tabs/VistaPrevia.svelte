@@ -3,6 +3,7 @@
 
     export let plantilla: Plantilla;
     export let divPlantilla: HTMLDivElement | null;
+    export let scrollVisible: boolean = false;
 
     let divGrafico: HTMLDivElement;
     $: plantilla.DatosTecnicos.GraficoAvance, actualizarGrafico(plantilla);
@@ -121,115 +122,121 @@
     }
 </script>
 
-<div>
-    {#each mensajesValidacion as mensaje}
-        <p class="has-text-danger">{mensaje}</p>
-    {/each}
-</div>
+<div style={scrollVisible ? "max-height: 100vh; overflow: auto;" : ""}>
+    <div>
+        {#each mensajesValidacion as mensaje}
+            <p class="has-text-danger">{mensaje}</p>
+        {/each}
+    </div>
 
-<div bind:this={divPlantilla}>
-    <!-- Plantilla generada en Asu -->
-    <div style="font-family: Arial, Helvetica, sans-serif; text-align: left">
-        <!-- Imagen del proyecto -->
-        <div class="separator" style="clear: both; text-align: center">
-            <a href={plantilla.DatosBasicos.UrlImagen} target="_blank">
-                <img
-                    alt=""
-                    width="640"
-                    src={plantilla.DatosBasicos.UrlImagen}
-                />
-            </a>
-        </div>
-        <br />
-        <!-- Alineando a la izquierda -->
-        <div style="text-align: left">
-            <!-- Sinopsis -->
-            <b>Sinopsis:</b>
-            <blockquote class="tr_bq">
-                {plantilla.DatosBasicos.Sinopsis}
-            </blockquote>
-        </div>
-
-        <!-- Datos del proyecto -->
-        <div>
-            <fieldset>
-                <legend>
-                    <b>Datos Técnicos</b>
-                </legend>
-                <br />
-                <b>Nombre Japonés: </b><span class="t_nihongo_kanji" lang="ja"
-                    >{plantilla.DatosTecnicos.NombreJapones}
-                </span>
-                <i>{plantilla.DatosTecnicos.NombreJaponesRomaji}</i>
-                <br />
-                <b>Nombres Alternativos: </b>{plantilla.DatosTecnicos
-                    .NombreAlternativo}
-                <i>{plantilla.DatosTecnicos.NombreAlternativoTraduccion}</i>
-                <br />
-                <b>Categoría: </b>{plantilla.DatosTecnicos.Categoria}
-                <br />
-                <b>Género: </b>{plantilla.DatosTecnicos.Genero}
-                <br />
-                <b>Episodios: </b>{plantilla.DatosTecnicos.Episodios}
-                <br />
-                <b>Producción: </b>{plantilla.DatosTecnicos.Estudio}
-                <br />
-                <b>Idioma: </b>Japonés (subtitulos en español)
-                <br />
-                <b>Códec y formato de video: </b>{plantilla.DatosTecnicos
-                    .FormatosArchivos}
-                <br />
-                <b>Tamaño capítulos: </b>{plantilla.DatosTecnicos
-                    .TamanoArchivos}
-            </fieldset>
+    <div bind:this={divPlantilla}>
+        <!-- Plantilla generada en Asu -->
+        <div
+            style="font-family: Arial, Helvetica, sans-serif; text-align: left"
+        >
+            <!-- Imagen del proyecto -->
+            <div class="separator" style="clear: both; text-align: center">
+                <a href={plantilla.DatosBasicos.UrlImagen} target="_blank">
+                    <img
+                        alt=""
+                        width="640"
+                        src={plantilla.DatosBasicos.UrlImagen}
+                    />
+                </a>
+            </div>
             <br />
-        </div>
+            <!-- Alineando a la izquierda -->
+            <div style="text-align: left">
+                <!-- Sinopsis -->
+                <b>Sinopsis:</b>
+                <blockquote class="tr_bq">
+                    {plantilla.DatosBasicos.Sinopsis}
+                </blockquote>
+            </div>
 
-        <!-- Botones de descarga
-		 Alineando al centro -->
-        <div style="text-align: center">
-            <a href={plantilla.DatosDescarga.UrlArchivosMp4} target="_blank"
-                ><img
-                    height="49"
-                    alt={plantilla.DatosDescarga.UrlArchivosMp4}
-                    src={plantilla.DatosDescarga.UrlBotonMp4}
-                    width="320"
-                /></a
-            >
+            <!-- Datos del proyecto -->
+            <div>
+                <fieldset>
+                    <legend>
+                        <b>Datos Técnicos</b>
+                    </legend>
+                    <br />
+                    <b>Nombre Japonés: </b><span
+                        class="t_nihongo_kanji"
+                        lang="ja"
+                        >{plantilla.DatosTecnicos.NombreJapones}
+                    </span>
+                    <i>{plantilla.DatosTecnicos.NombreJaponesRomaji}</i>
+                    <br />
+                    <b>Nombres Alternativos: </b>{plantilla.DatosTecnicos
+                        .NombreAlternativo}
+                    <i>{plantilla.DatosTecnicos.NombreAlternativoTraduccion}</i>
+                    <br />
+                    <b>Categoría: </b>{plantilla.DatosTecnicos.Categoria}
+                    <br />
+                    <b>Género: </b>{plantilla.DatosTecnicos.Genero}
+                    <br />
+                    <b>Episodios: </b>{plantilla.DatosTecnicos.Episodios}
+                    <br />
+                    <b>Producción: </b>{plantilla.DatosTecnicos.Estudio}
+                    <br />
+                    <b>Idioma: </b>Japonés (subtitulos en español)
+                    <br />
+                    <b>Códec y formato de video: </b>{plantilla.DatosTecnicos
+                        .FormatosArchivos}
+                    <br />
+                    <b>Tamaño capítulos: </b>{plantilla.DatosTecnicos
+                        .TamanoArchivos}
+                </fieldset>
+                <br />
+            </div>
 
-            <a href={plantilla.DatosDescarga.UrlArchivosAvi} target="_blank"
-                ><img
-                    height="49"
-                    alt={plantilla.DatosDescarga.UrlArchivosAvi}
-                    src={plantilla.DatosDescarga.UrlBotonAvi}
-                    width="320"
-                /></a
-            >
-        </div>
+            <!-- Botones de descarga
+             Alineando al centro -->
+            <div style="text-align: center">
+                <a href={plantilla.DatosDescarga.UrlArchivosMp4} target="_blank"
+                    ><img
+                        height="49"
+                        alt={plantilla.DatosDescarga.UrlArchivosMp4}
+                        src={plantilla.DatosDescarga.UrlBotonMp4}
+                        width="320"
+                    /></a
+                >
 
-        <!-- Alineando a la izquierda -->
-        <div style="text-align: left">
-            <fieldset>
-                <legend>
-                    <b>Staff del proyecto</b>
-                </legend>
-                <ul>
-                    {#each plantilla.DatosStaff.Integrantes as integrante}
-                        <li>{integrante.Cargo}: {integrante.Nombre}</li>
-                    {/each}
-                </ul>
-            </fieldset>
-        </div>
+                <a href={plantilla.DatosDescarga.UrlArchivosAvi} target="_blank"
+                    ><img
+                        height="49"
+                        alt={plantilla.DatosDescarga.UrlArchivosAvi}
+                        src={plantilla.DatosDescarga.UrlBotonAvi}
+                        width="320"
+                    /></a
+                >
+            </div>
 
-        <!-- Gráfico de avance -->
-        <div style="text-align: left">
-            <br />
-            <fieldset>
-                <legend>
-                    <b>Estado de avance</b>
-                </legend>
-                <div bind:this={divGrafico} />
-            </fieldset>
+            <!-- Alineando a la izquierda -->
+            <div style="text-align: left">
+                <fieldset>
+                    <legend>
+                        <b>Staff del proyecto</b>
+                    </legend>
+                    <ul>
+                        {#each plantilla.DatosStaff.Integrantes as integrante}
+                            <li>{integrante.Cargo}: {integrante.Nombre}</li>
+                        {/each}
+                    </ul>
+                </fieldset>
+            </div>
+
+            <!-- Gráfico de avance -->
+            <div style="text-align: left">
+                <br />
+                <fieldset>
+                    <legend>
+                        <b>Estado de avance</b>
+                    </legend>
+                    <div bind:this={divGrafico} />
+                </fieldset>
+            </div>
         </div>
     </div>
 </div>

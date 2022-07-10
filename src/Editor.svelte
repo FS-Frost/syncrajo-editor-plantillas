@@ -33,7 +33,8 @@
 
     let divPlantilla: HTMLDivElement | null = null;
     let plantilla: Plantilla = newPlantillaEjemplo();
-    let activeTab: Tab = Tab.VistaPrevia;
+    let activeTab: Tab = Tab.Basicos;
+    $: esTabVistaPrevia = activeTab == Tab.VistaPrevia;
 
     function setTab(tab: Tab) {
         activeTab = tab;
@@ -57,17 +58,30 @@
         </ul>
     </div>
 
-    {#if activeTab == Tab.Basicos}
-        <Basicos bind:datos={plantilla.DatosBasicos} />
-    {:else if activeTab == Tab.Descarga}
-        <Descarga bind:datos={plantilla.DatosDescarga} />
-    {:else if activeTab == Tab.Staff}
-        <Staff bind:datos={plantilla.DatosStaff} />
-    {:else if activeTab == Tab.Tecnicos}
-        <Tecnicos bind:datos={plantilla.DatosTecnicos} />
-    {:else}
-        <VistaPrevia bind:plantilla bind:divPlantilla />
-    {/if}
+    <div class="columns">
+        <div
+            class="column {esTabVistaPrevia ? 'is-hidden' : 'is-6'} mr-3"
+            style="max-height: 100vh; overflow: auto;"
+        >
+            {#if activeTab == Tab.Basicos}
+                <Basicos bind:datos={plantilla.DatosBasicos} />
+            {:else if activeTab == Tab.Descarga}
+                <Descarga bind:datos={plantilla.DatosDescarga} />
+            {:else if activeTab == Tab.Staff}
+                <Staff bind:datos={plantilla.DatosStaff} />
+            {:else if activeTab == Tab.Tecnicos}
+                <Tecnicos bind:datos={plantilla.DatosTecnicos} />
+            {/if}
+        </div>
+
+        <div class="colum {esTabVistaPrevia ? 'is-12' : 'is-6'}">
+            <VistaPrevia
+                bind:plantilla
+                bind:divPlantilla
+                scrollVisible={!esTabVistaPrevia}
+            />
+        </div>
+    </div>
 </div>
 
 <style>
