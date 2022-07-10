@@ -17,7 +17,7 @@
     <div class="field">
         <label class="label" for="">Imagen</label>
         <div class="control">
-            <input class="input" type="text" bind:value={datos.Imagen} />
+            <input class="input" type="text" bind:value={datos.UrlImagen} />
         </div>
     </div>
 
@@ -25,7 +25,7 @@
     <div class="field">
         <label class="label" for="">Sinopsis</label>
         <div class="control">
-            <textarea class="textarea" bind:value={datos.Descripcion} />
+            <textarea class="textarea" bind:value={datos.Sinopsis} />
         </div>
     </div>
 </div>

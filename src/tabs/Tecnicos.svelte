@@ -73,7 +73,12 @@
     <div class="field">
         <label class="label" for="">Género</label>
         <div class="control">
-            <input class="input" type="text" bind:value={datos.Genero} />
+            <input
+                class="input"
+                type="text"
+                title="Recuentos de la vida, aventura, escolar, etc."
+                bind:value={datos.Genero}
+            />
         </div>
     </div>
 

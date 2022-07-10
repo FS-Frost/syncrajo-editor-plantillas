@@ -4,71 +4,69 @@
     import Descarga from "./tabs/Descarga.svelte";
     import Opciones from "./tabs/Opciones.svelte";
     import Staff from "./tabs/Staff.svelte";
+    import { Section, Tab } from "./tabs/tabs";
     import Tecnicos from "./tabs/Tecnicos.svelte";
+    import VistaPrevia from "./tabs/VistaPrevia.svelte";
 
+    const sections: Section[] = [
+        {
+            Tab: Tab.Basicos,
+            Name: "Básicos",
+        },
+        {
+            Tab: Tab.Descarga,
+            Name: "Descarga",
+        },
+        {
+            Tab: Tab.Staff,
+            Name: "Staff",
+        },
+        {
+            Tab: Tab.Tecnicos,
+            Name: "Técnicos",
+        },
+        {
+            Tab: Tab.VistaPrevia,
+            Name: "Vista previa",
+        },
+    ];
+
+    let divPlantilla: HTMLDivElement | null = null;
     let plantilla: Plantilla = newPlantilla();
+    let activeTab: Tab = Tab.VistaPrevia;
 
-    enum tabs {
-        Basicos,
-        Descarga,
-        Staff,
-        Tenicos,
-    }
-
-    let activeTab: tabs = tabs.Basicos;
-
-    function setTab(tab: tabs) {
+    function setTab(tab: Tab) {
         activeTab = tab;
-    }
-
-    function classIsActiveTab(tab: tabs): string {
-        return activeTab == tab ? "is-active" : "";
     }
 </script>
 
 <div class="editor">
-    <Opciones bind:plantilla />
+    <Opciones bind:plantilla bind:divPlantilla />
 
     <div class="tabs">
         <ul>
-            <li
-                class={classIsActiveTab(tabs.Basicos)}
-                on:click={() => setTab(tabs.Basicos)}
-            >
-                <a href="#basicos">Básicos</a>
-            </li>
-
-            <li
-                class={classIsActiveTab(tabs.Descarga)}
-                on:click={() => setTab(tabs.Descarga)}
-            >
-                <a href="#descarga">Descarga</a>
-            </li>
-
-            <li
-                class={classIsActiveTab(tabs.Staff)}
-                on:click={() => setTab(tabs.Staff)}
-            >
-                <a href="#staff">Staff</a>
-            </li>
-
-            <li
-                class={classIsActiveTab(tabs.Tenicos)}
-                on:click={() => setTab(tabs.Tenicos)}
-            >
-                <a href="#tecnicos">Técnicos</a>
-            </li>
+            {#each sections as section}
+                <li
+                    class={activeTab == section.Tab ? "is-active" : ""}
+                    on:click={() => setTab(section.Tab)}
+                >
+                    <a href={`#${section.Name.toLowerCase()}`}>{section.Name}</a
+                    >
+                </li>
+            {/each}
         </ul>
     </div>
 
-    {#if activeTab == tabs.Basicos}
+    {#if activeTab == Tab.Basicos}
         <Basicos bind:datos={plantilla.DatosBasicos} />
-    {:else if activeTab == tabs.Descarga}
+    {:else if activeTab == Tab.Descarga}
         <Descarga bind:datos={plantilla.DatosDescarga} />
-    {:else if activeTab == tabs.Staff}
+    {:else if activeTab == Tab.Staff}
         <Staff bind:datos={plantilla.DatosStaff} />
-    {:else}
+    {:else if activeTab == Tab.Tecnicos}
         <Tecnicos bind:datos={plantilla.DatosTecnicos} />
+    {:else}
+        <VistaPrevia bind:plantilla bind:divPlantilla />
     {/if}
 </div>
 

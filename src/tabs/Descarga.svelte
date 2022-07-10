@@ -9,7 +9,7 @@
     <div class="field">
         <label class="label" for="">Botón MP4</label>
         <div class="control">
-            <input class="input" type="text" bind:value={datos.BotonMp4} />
+            <input class="input" type="text" bind:value={datos.UrlBotonMp4} />
         </div>
     </div>
 
@@ -17,7 +17,11 @@
     <div class="field">
         <label class="label" for="">Enlace MP4</label>
         <div class="control">
-            <input class="input" type="text" bind:value={datos.EnlaceMp4} />
+            <input
+                class="input"
+                type="text"
+                bind:value={datos.UrlArchivosMp4}
+            />
         </div>
     </div>
 
@@ -25,7 +29,7 @@
     <div class="field">
         <label class="label" for="">Botón AVI</label>
         <div class="control">
-            <input class="input" type="text" bind:value={datos.BotonAvi} />
+            <input class="input" type="text" bind:value={datos.UrlBotonAvi} />
         </div>
     </div>
 
@@ -33,7 +37,11 @@
     <div class="field">
         <label class="label" for="">Enlace AVI</label>
         <div class="control">
-            <input class="input" type="text" bind:value={datos.EnlaceAvi} />
+            <input
+                class="input"
+                type="text"
+                bind:value={datos.UrlArchivosAvi}
+            />
         </div>
     </div>
 </div>

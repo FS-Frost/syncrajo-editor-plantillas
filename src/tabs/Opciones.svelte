@@ -3,6 +3,7 @@
     import { Categoria, newPlantilla, Plantilla } from "../plantilla";
 
     export let plantilla: Plantilla;
+    export let divPlantilla: HTMLDivElement | null;
     let fileButton: HTMLInputElement;
 
     function cargarEjemplo() {
@@ -10,18 +11,19 @@
             DatosBasicos: {
                 Proyecto:
                     "Yahari Ore no Seishun Rabu Kome wa Machigatteiru. Zoku",
-                Imagen: "http://i1302.photobucket.com/albums/ag138/inazuma_seikatsu/Banners/Yahari%202_zpstxdkzd5i.jpg",
-                Descripcion:
+                UrlImagen:
+                    "http://i1302.photobucket.com/albums/ag138/inazuma_seikatsu/Banners/Yahari%202_zpstxdkzd5i.jpg",
+                Sinopsis:
                     "Hikigaya Hachiman es un estudiante de secundaria antisocial sin amigos ni novia y, como resultado, tiene una visión distorsionada de la vida. Cuando ve a sus compañeros hablando animadamente sobre sus vidas de adolescentes, susurra: “Todos son un puñado de mentirosos”. Cuando se le pregunta acerca de sus sueños, responde: “sin trabajar”. Una profesora hace que Hachiman se una al “club de voluntarios”, que casualmente tiene a la chica más bella de la escuela, Yukino Yukinoshita.",
             },
             DatosDescarga: {
-                BotonMp4:
+                UrlBotonMp4:
                     "https://3.bp.blogspot.com/-LNecaZS2Xeg/U7y4vXn2RTI/AAAAAAAABNU/TWQ7EQiS3eY/s1600/mega.png",
-                EnlaceMp4:
+                UrlArchivosMp4:
                     "https://mega.co.nz/#F!iMB3AZQB!dw_pm_qhHkenj0EkdW3zpQ",
-                BotonAvi:
+                UrlBotonAvi:
                     "https://4.bp.blogspot.com/-gNc_vnGu3eY/U7y4zzFemvI/AAAAAAAABNc/CKv-PeeI3Sk/s1600/megaavi.png",
-                EnlaceAvi:
+                UrlArchivosAvi:
                     "https://mega.co.nz/#F!tpxwkDCS!Gq_0gNRcAEHYlu5Od-xvVg",
             },
             DatosStaff: {
@@ -110,9 +112,15 @@
     }
 
     function generarPlantilla() {
-        const plantillaSerializada = serializarPlantilla();
-        navigator.clipboard.writeText(plantillaSerializada);
-        alert("Plantilla copiada al portapapeles");
+        if (divPlantilla == null) {
+            alert("La plantilla es inválida");
+            return;
+        }
+
+        let html = "<!-- Plantilla generada en Asu -->";
+        html += divPlantilla.innerHTML;
+        navigator.clipboard.writeText(html);
+        alert("Plantilla HTML copiada al portapapeles");
     }
 
     function guardarComo() {

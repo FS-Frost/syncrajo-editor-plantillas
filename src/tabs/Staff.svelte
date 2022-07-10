@@ -60,6 +60,12 @@
         );
         indexIntegranteActivo =
             indexIntegranteActivo > 0 ? indexIntegranteActivo - 1 : 0;
+
+        if (datos.Integrantes.length == 0) {
+            agregarIntegrante();
+            return;
+        }
+
         inputCargo.focus();
     }
 </script>

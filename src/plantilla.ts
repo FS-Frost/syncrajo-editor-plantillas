@@ -7,15 +7,15 @@ export interface Plantilla {
 
 export interface DatosBasicos {
     Proyecto: string;
-    Imagen: string;
-    Descripcion: string;
+    UrlImagen: string;
+    Sinopsis: string;
 }
 
 export interface DatosDescarga {
-    BotonMp4: string;
-    EnlaceMp4: string;
-    BotonAvi: string;
-    EnlaceAvi: string;
+    UrlBotonMp4: string;
+    UrlArchivosMp4: string;
+    UrlBotonAvi: string;
+    UrlArchivosAvi: string;
 }
 
 export interface Integrante {
@@ -54,14 +54,14 @@ export function newPlantilla(): Plantilla {
     const plantilla: Plantilla = {
         DatosBasicos: {
             Proyecto: "",
-            Imagen: "",
-            Descripcion: "No disponible",
+            UrlImagen: "",
+            Sinopsis: "No disponible",
         },
         DatosDescarga: {
-            BotonMp4: "https://3.bp.blogspot.com/-LNecaZS2Xeg/U7y4vXn2RTI/AAAAAAAABNU/TWQ7EQiS3eY/s1600/mega.png",
-            EnlaceMp4: "",
-            BotonAvi: "https://4.bp.blogspot.com/-gNc_vnGu3eY/U7y4zzFemvI/AAAAAAAABNc/CKv-PeeI3Sk/s1600/megaavi.png",
-            EnlaceAvi: "",
+            UrlBotonMp4: "https://3.bp.blogspot.com/-LNecaZS2Xeg/U7y4vXn2RTI/AAAAAAAABNU/TWQ7EQiS3eY/s1600/mega.png",
+            UrlArchivosMp4: "",
+            UrlBotonAvi: "https://4.bp.blogspot.com/-gNc_vnGu3eY/U7y4zzFemvI/AAAAAAAABNc/CKv-PeeI3Sk/s1600/megaavi.png",
+            UrlArchivosAvi: "",
         },
         DatosStaff: {
             Integrantes: [
