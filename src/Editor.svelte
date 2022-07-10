@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { newPlantilla, Plantilla } from "./plantilla";
+    import { newPlantillaEjemplo, Plantilla } from "./plantilla";
     import Basicos from "./tabs/Basicos.svelte";
     import Descarga from "./tabs/Descarga.svelte";
     import Opciones from "./tabs/Opciones.svelte";
@@ -32,7 +32,7 @@
     ];
 
     let divPlantilla: HTMLDivElement | null = null;
-    let plantilla: Plantilla = newPlantilla();
+    let plantilla: Plantilla = newPlantillaEjemplo();
     let activeTab: Tab = Tab.VistaPrevia;
 
     function setTab(tab: Tab) {
