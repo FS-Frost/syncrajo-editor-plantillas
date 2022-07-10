@@ -72,6 +72,9 @@
 
 <style>
     .editor {
-        margin: 5%;
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 5%;
+        margin-right: 5%;
     }
 </style>
