@@ -1,5 +1,7 @@
 # Editor de plantillas de SyncRajo Fansub
 
+[![Deploy to GitHub Pages](https://github.com/FS-Frost/syncrajo-editor-plantillas/actions/workflows/main.yml/badge.svg)](https://github.com/FS-Frost/syncrajo-editor-plantillas/actions/workflows/main.yml)
+
 Editor web para las plantillas de anime de [SyncRajo Fansub](http://www.syncrajo.net/).
 
 ## Desarrollado con
