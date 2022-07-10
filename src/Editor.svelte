@@ -44,7 +44,7 @@
 <div class="editor">
     <Opciones bind:plantilla bind:divPlantilla />
 
-    <div class="tabs">
+    <div class="tabs is-centered">
         <ul>
             {#each sections as section}
                 <li
