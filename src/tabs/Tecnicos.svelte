@@ -54,7 +54,7 @@
     <div class="field">
         <label class="label" for="">Categoría</label>
         <div class="control">
-            <div class="select">
+            <div class="select is-fullwidth">
                 <select bind:value={datos.Categoria}>
                     <option value={Categoria.Serie}>{Categoria.Serie}</option>
                     <option value={Categoria.SerieBluray}
