@@ -52,7 +52,7 @@ export interface DatosTecnicos {
     Estudio: string;
     FormatosArchivos: string;
     TamanoArchivos: string;
-    GraficoAvance: string;
+    HtmlGraficoAvance: string;
 }
 
 export function newPlantilla(): Plantilla {
@@ -100,7 +100,7 @@ export function newPlantilla(): Plantilla {
             Estudio: "",
             FormatosArchivos: "[.AVI 704×396 xVID] [.MP4 1280x720 x264]",
             TamanoArchivos: "[.AVI 180 MB] [.MP4 Peso variable]",
-            GraficoAvance: "",
+            HtmlGraficoAvance: "",
         },
     };
     return plantilla;
@@ -178,7 +178,7 @@ export function newPlantillaEjemplo(): Plantilla {
                 "[.AVI 704×396 xVID] [.MP4 1280x720 x264] [.MP4 1920x1080 x264]",
             TamanoArchivos:
                 "[.AVI 300 MB] [.MP4 720p Peso variable] [.MP4 1080p Peso variable]",
-            GraficoAvance:
+            HtmlGraficoAvance:
                 "<iframe width='600' height='371' seamless frameborder='0' scrolling='no' src='https://docs.google.com/spreadsheets/d/1vdYD1nhj2Xt3Chem1pINDe_Soc_9p8g3ddv9J__NsrI/pubchart?oid=1270762129&amp;format=interactive'></iframe>",
         },
     };

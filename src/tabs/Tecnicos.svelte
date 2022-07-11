@@ -126,7 +126,11 @@
     <div class="field">
         <label class="label" for="">Gráfico de avance</label>
         <div class="control">
-            <input class="input" type="text" bind:value={datos.GraficoAvance} />
+            <input
+                class="input"
+                type="text"
+                bind:value={datos.HtmlGraficoAvance}
+            />
         </div>
     </div>
 </div>

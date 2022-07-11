@@ -138,7 +138,7 @@
             mensajes.push(`${seccion}: tamaños de archivos no definidos.`);
         }
 
-        if (plantilla.DatosTecnicos.GraficoAvance == "") {
+        if (plantilla.DatosTecnicos.HtmlGraficoAvance == "") {
             mensajes.push(`${seccion}: gráfico de avance no definido.`);
         }
 

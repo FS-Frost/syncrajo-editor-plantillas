@@ -7,14 +7,14 @@
     export let mensajesValidacion: string[];
 
     let divGrafico: HTMLDivElement;
-    $: plantilla.DatosTecnicos.GraficoAvance, actualizarGrafico(plantilla);
+    $: plantilla.DatosTecnicos.HtmlGraficoAvance, actualizarGrafico(plantilla);
 
     function actualizarGrafico(plantilla: Plantilla) {
         if (divGrafico == null) {
             return;
         }
 
-        divGrafico.innerHTML = plantilla.DatosTecnicos.GraficoAvance;
+        divGrafico.innerHTML = plantilla.DatosTecnicos.HtmlGraficoAvance;
     }
 </script>
 
