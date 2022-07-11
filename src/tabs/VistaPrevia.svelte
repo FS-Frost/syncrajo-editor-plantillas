@@ -4,10 +4,10 @@
     export let plantilla: Plantilla;
     export let divPlantilla: HTMLDivElement | null;
     export let scrollVisible: boolean = false;
+    export let mensajesValidacion: string[];
 
     let divGrafico: HTMLDivElement;
     $: plantilla.DatosTecnicos.GraficoAvance, actualizarGrafico(plantilla);
-    $: mensajesValidacion = validarPlantilla(plantilla);
 
     function actualizarGrafico(plantilla: Plantilla) {
         if (divGrafico == null) {
@@ -15,110 +15,6 @@
         }
 
         divGrafico.innerHTML = plantilla.DatosTecnicos.GraficoAvance;
-    }
-
-    function validarPlantilla(plantilla: Plantilla): string[] {
-        const mensajes: string[] = [];
-        let seccion = "Datos básicos";
-
-        if (plantilla.DatosBasicos.Proyecto == "") {
-            mensajes.push(`${seccion}: Nombre del proyecto no definido.`);
-        }
-
-        if (plantilla.DatosBasicos.UrlImagen == "") {
-            mensajes.push(`${seccion}: URL de imagen no definida.`);
-        }
-
-        if (plantilla.DatosBasicos.Sinopsis == "") {
-            mensajes.push(`${seccion}: Sinopsis no definida.`);
-        }
-
-        seccion = "Datos de descarga";
-
-        if (plantilla.DatosDescarga.UrlBotonMp4 == "") {
-            mensajes.push(`${seccion}: URL del botón MP4 no definida.`);
-        }
-
-        if (plantilla.DatosDescarga.UrlArchivosMp4 == "") {
-            mensajes.push(`${seccion}: URL de los archivos MP4 no definida.`);
-        }
-
-        if (plantilla.DatosDescarga.UrlBotonAvi == "") {
-            mensajes.push(`${seccion}: URL del botón AVI no definida.`);
-        }
-
-        if (plantilla.DatosDescarga.UrlArchivosAvi == "") {
-            mensajes.push(`${seccion}: URL de los archivos AVI no definida.`);
-        }
-
-        seccion = "Datos del staff";
-
-        if (plantilla.DatosStaff.Integrantes.length == 0) {
-            mensajes.push(`${seccion}: 0 integrantes definidos.`);
-        }
-
-        for (let i = 0; i < plantilla.DatosStaff.Integrantes.length; i++) {
-            const integrante = plantilla.DatosStaff.Integrantes[i];
-            const numIntegrante = i + 1;
-
-            if (integrante.Cargo == "") {
-                mensajes.push(
-                    `${seccion}: integrante ${numIntegrante}, cargo no definido.`
-                );
-            }
-
-            if (integrante.Nombre == "") {
-                mensajes.push(
-                    `${seccion}: integrante ${numIntegrante}, nombre no definido.`
-                );
-            }
-        }
-
-        seccion = "Datos técnicos";
-
-        if (plantilla.DatosTecnicos.NombreJapones == "") {
-            mensajes.push(`${seccion}: nombre japonés no definido.`);
-        }
-
-        if (plantilla.DatosTecnicos.NombreJaponesRomaji == "") {
-            mensajes.push(`${seccion}: nombre japonés (romaji) no definido.`);
-        }
-
-        if (plantilla.DatosTecnicos.NombreAlternativo == "") {
-            mensajes.push(`${seccion}: nombre alternativo no definido.`);
-        }
-
-        if (plantilla.DatosTecnicos.NombreAlternativoTraduccion == "") {
-            mensajes.push(
-                `${seccion}: nombre alternativo (traducción) no definido.`
-            );
-        }
-
-        if (plantilla.DatosTecnicos.Genero == "") {
-            mensajes.push(`${seccion}: género no definido.`);
-        }
-
-        if (plantilla.DatosTecnicos.Episodios == "") {
-            mensajes.push(`${seccion}: cantidad de episodios no definida.`);
-        }
-
-        if (plantilla.DatosTecnicos.Estudio == "") {
-            mensajes.push(`${seccion}: estudio no definido.`);
-        }
-
-        if (plantilla.DatosTecnicos.FormatosArchivos == "") {
-            mensajes.push(`${seccion}: formatos de archivos no definidos.`);
-        }
-
-        if (plantilla.DatosTecnicos.TamanoArchivos == "") {
-            mensajes.push(`${seccion}: tamaños de archivos no definidos.`);
-        }
-
-        if (plantilla.DatosTecnicos.GraficoAvance == "") {
-            mensajes.push(`${seccion}: gráfico de avance no definido.`);
-        }
-
-        return mensajes;
     }
 </script>
 
@@ -193,24 +89,20 @@
 
             <!-- Botones de descarga
              Alineando al centro -->
-            <div style="text-align: center">
-                <a href={plantilla.DatosDescarga.UrlArchivosMp4} target="_blank"
-                    ><img
-                        height="49"
-                        alt={plantilla.DatosDescarga.UrlArchivosMp4}
-                        src={plantilla.DatosDescarga.UrlBotonMp4}
-                        width="320"
-                    /></a
-                >
-
-                <a href={plantilla.DatosDescarga.UrlArchivosAvi} target="_blank"
-                    ><img
-                        height="49"
-                        alt={plantilla.DatosDescarga.UrlArchivosAvi}
-                        src={plantilla.DatosDescarga.UrlBotonAvi}
-                        width="320"
-                    /></a
-                >
+            <div
+                style="display: flex; flex-direction: column; justify-content: center; align-items: center;"
+            >
+                {#each plantilla.DatosDescarga.Botones as boton}
+                    <div style="display: flex; flex-direction: row;">
+                        <a href={boton.Url} target="_blank">
+                            <button
+                                class="boton"
+                                style="background-color: {boton.Color};color: white;border: 0px;border-radius: 0.2rem;width: 20rem;height: 3rem;font-weight: bold;font-size: 1.2rem;cursor:pointer"
+                                >{boton.Texto}</button
+                            ></a
+                        >
+                    </div>
+                {/each}
             </div>
 
             <!-- Alineando a la izquierda -->

@@ -35,14 +35,119 @@
     let plantilla: Plantilla = newPlantillaEjemplo();
     let activeTab: Tab = Tab.Basicos;
     $: esTabVistaPrevia = activeTab == Tab.VistaPrevia;
+    $: mensajesValidacion = validarPlantilla(plantilla);
 
     function setTab(tab: Tab) {
         activeTab = tab;
     }
+
+    function validarPlantilla(plantilla: Plantilla): string[] {
+        const mensajes: string[] = [];
+        let seccion = "Datos básicos";
+
+        if (plantilla.DatosBasicos.Proyecto == "") {
+            mensajes.push(`${seccion}: Nombre del proyecto no definido.`);
+        }
+
+        if (plantilla.DatosBasicos.UrlImagen == "") {
+            mensajes.push(`${seccion}: URL de imagen no definida.`);
+        }
+
+        if (plantilla.DatosBasicos.Sinopsis == "") {
+            mensajes.push(`${seccion}: Sinopsis no definida.`);
+        }
+
+        for (let i = 0; i < plantilla.DatosDescarga.Botones.length; i++) {
+            const numeroBoton = i + 1;
+            seccion = `Datos de descarga, botón ${numeroBoton}`;
+            const boton = plantilla.DatosDescarga.Botones[i];
+
+            if (boton.Texto == "") {
+                mensajes.push(`${seccion}: texto no definido.`);
+            }
+
+            if (boton.Url == "") {
+                mensajes.push(`${seccion}: URL no definida.`);
+            }
+
+            if (boton.Color == "") {
+                mensajes.push(`${seccion}: color no definido.`);
+            }
+        }
+
+        seccion = "Datos del staff";
+
+        if (plantilla.DatosStaff.Integrantes.length == 0) {
+            mensajes.push(`${seccion}: 0 integrantes definidos.`);
+        }
+
+        for (let i = 0; i < plantilla.DatosStaff.Integrantes.length; i++) {
+            const integrante = plantilla.DatosStaff.Integrantes[i];
+            const numIntegrante = i + 1;
+
+            if (integrante.Cargo == "") {
+                mensajes.push(
+                    `${seccion}: integrante ${numIntegrante}, cargo no definido.`
+                );
+            }
+
+            if (integrante.Nombre == "") {
+                mensajes.push(
+                    `${seccion}: integrante ${numIntegrante}, nombre no definido.`
+                );
+            }
+        }
+
+        seccion = "Datos técnicos";
+
+        if (plantilla.DatosTecnicos.NombreJapones == "") {
+            mensajes.push(`${seccion}: nombre japonés no definido.`);
+        }
+
+        if (plantilla.DatosTecnicos.NombreJaponesRomaji == "") {
+            mensajes.push(`${seccion}: nombre japonés (romaji) no definido.`);
+        }
+
+        if (plantilla.DatosTecnicos.NombreAlternativo == "") {
+            mensajes.push(`${seccion}: nombre alternativo no definido.`);
+        }
+
+        if (plantilla.DatosTecnicos.NombreAlternativoTraduccion == "") {
+            mensajes.push(
+                `${seccion}: nombre alternativo (traducción) no definido.`
+            );
+        }
+
+        if (plantilla.DatosTecnicos.Genero == "") {
+            mensajes.push(`${seccion}: género no definido.`);
+        }
+
+        if (plantilla.DatosTecnicos.Episodios == "") {
+            mensajes.push(`${seccion}: cantidad de episodios no definida.`);
+        }
+
+        if (plantilla.DatosTecnicos.Estudio == "") {
+            mensajes.push(`${seccion}: estudio no definido.`);
+        }
+
+        if (plantilla.DatosTecnicos.FormatosArchivos == "") {
+            mensajes.push(`${seccion}: formatos de archivos no definidos.`);
+        }
+
+        if (plantilla.DatosTecnicos.TamanoArchivos == "") {
+            mensajes.push(`${seccion}: tamaños de archivos no definidos.`);
+        }
+
+        if (plantilla.DatosTecnicos.GraficoAvance == "") {
+            mensajes.push(`${seccion}: gráfico de avance no definido.`);
+        }
+
+        return mensajes;
+    }
 </script>
 
 <div class="editor">
-    <Opciones bind:plantilla bind:divPlantilla />
+    <Opciones bind:plantilla bind:divPlantilla bind:mensajesValidacion />
 
     <div class="tabs is-centered">
         <ul>
@@ -74,10 +179,11 @@
             {/if}
         </div>
 
-        <div class="colum {esTabVistaPrevia ? 'is-12' : 'is-6'}">
+        <div class="column {esTabVistaPrevia ? 'is-12' : 'is-6'}">
             <VistaPrevia
                 bind:plantilla
                 bind:divPlantilla
+                bind:mensajesValidacion
                 scrollVisible={!esTabVistaPrevia}
             />
         </div>

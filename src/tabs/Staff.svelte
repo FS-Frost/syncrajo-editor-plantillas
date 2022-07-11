@@ -112,11 +112,23 @@
         <div>
             <button
                 class="button is-primary"
-                on:click={() => agregarIntegrante()}>Agregar</button
+                title="Agregar integrante"
+                on:click={() => agregarIntegrante()}
             >
-            <button class="button is-danger" on:click={() => quitarIntegrante()}
-                >Quitar</button
+                <span class="icon">
+                    <i class="fa-solid fa-plus" />
+                </span>
+            </button>
+
+            <button
+                class="button is-danger"
+                title="Quitar integrante"
+                on:click={() => quitarIntegrante()}
             >
+                <span class="icon">
+                    <i class="fa-solid fa-xmark" />
+                </span>
+            </button>
         </div>
     </div>
 </div>

@@ -4,7 +4,9 @@
 
     export let plantilla: Plantilla;
     export let divPlantilla: HTMLDivElement | null;
+    export let mensajesValidacion: string[];
     let fileButton: HTMLInputElement;
+    $: esPlantillaValida = mensajesValidacion.length == 0;
 
     function cargarEjemplo() {
         plantilla = newPlantillaEjemplo();
@@ -66,7 +68,11 @@
     }
 
     function limpiar() {
-        plantilla = newPlantilla();
+        const continuar = confirm("¿Limpiar todos los campos?");
+
+        if (continuar) {
+            plantilla = newPlantilla();
+        }
     }
 
     function verPlantillaDesplegada() {
@@ -82,6 +88,7 @@
     <button
         class="button is-info"
         title="Generar el código HTML y lo copia al portapapeles"
+        disabled={!esPlantillaValida}
         on:click={() => generarPlantilla()}>Generar</button
     >
 
@@ -101,6 +108,7 @@
     <button
         class="button is-info"
         title="Guardar plantilla en formato YAML"
+        disabled={!esPlantillaValida}
         on:click={() => guardarComo()}>Guardar</button
     >
 

@@ -1,3 +1,5 @@
+const prefijoBotonDescarga = "Carpeta en MEGA";
+
 export interface Plantilla {
     DatosBasicos: DatosBasicos;
     DatosDescarga: DatosDescarga;
@@ -11,11 +13,16 @@ export interface DatosBasicos {
     Sinopsis: string;
 }
 
+export const BotonDescargaColorDefault = "#df5228";
+
+export interface BotonDescarga {
+    Texto: string;
+    Url: string;
+    Color: string;
+}
+
 export interface DatosDescarga {
-    UrlBotonMp4: string;
-    UrlArchivosMp4: string;
-    UrlBotonAvi: string;
-    UrlArchivosAvi: string;
+    Botones: BotonDescarga[];
 }
 
 export interface Integrante {
@@ -58,10 +65,18 @@ export function newPlantilla(): Plantilla {
             Sinopsis: "No disponible",
         },
         DatosDescarga: {
-            UrlBotonMp4: "https://3.bp.blogspot.com/-LNecaZS2Xeg/U7y4vXn2RTI/AAAAAAAABNU/TWQ7EQiS3eY/s1600/mega.png",
-            UrlArchivosMp4: "",
-            UrlBotonAvi: "https://4.bp.blogspot.com/-gNc_vnGu3eY/U7y4zzFemvI/AAAAAAAABNc/CKv-PeeI3Sk/s1600/megaavi.png",
-            UrlArchivosAvi: "",
+            Botones: [
+                {
+                    Texto: `${prefijoBotonDescarga} MP4`,
+                    Url: "",
+                    Color: BotonDescargaColorDefault,
+                },
+                {
+                    Texto: `${prefijoBotonDescarga} AVI`,
+                    Url: "",
+                    Color: BotonDescargaColorDefault,
+                },
+            ],
         },
         DatosStaff: {
             Integrantes: [
@@ -102,14 +117,18 @@ export function newPlantillaEjemplo(): Plantilla {
                 "Hikigaya Hachiman es un estudiante de secundaria antisocial sin amigos ni novia y, como resultado, tiene una visión distorsionada de la vida. Cuando ve a sus compañeros hablando animadamente sobre sus vidas de adolescentes, susurra: “Todos son un puñado de mentirosos”. Cuando se le pregunta acerca de sus sueños, responde: “sin trabajar”. Una profesora hace que Hachiman se una al “club de voluntarios”, que casualmente tiene a la chica más bella de la escuela, Yukino Yukinoshita.",
         },
         DatosDescarga: {
-            UrlBotonMp4:
-                "https://3.bp.blogspot.com/-LNecaZS2Xeg/U7y4vXn2RTI/AAAAAAAABNU/TWQ7EQiS3eY/s1600/mega.png",
-            UrlArchivosMp4:
-                "https://mega.co.nz/#F!iMB3AZQB!dw_pm_qhHkenj0EkdW3zpQ",
-            UrlBotonAvi:
-                "https://4.bp.blogspot.com/-gNc_vnGu3eY/U7y4zzFemvI/AAAAAAAABNc/CKv-PeeI3Sk/s1600/megaavi.png",
-            UrlArchivosAvi:
-                "https://mega.co.nz/#F!tpxwkDCS!Gq_0gNRcAEHYlu5Od-xvVg",
+            Botones: [
+                {
+                    Texto: `${prefijoBotonDescarga} MP4`,
+                    Url: "https://mega.co.nz/#F!iMB3AZQB!dw_pm_qhHkenj0EkdW3zpQ",
+                    Color: BotonDescargaColorDefault,
+                },
+                {
+                    Texto: `${prefijoBotonDescarga} AVI`,
+                    Url: "https://mega.co.nz/#F!tpxwkDCS!Gq_0gNRcAEHYlu5Od-xvVg",
+                    Color: BotonDescargaColorDefault,
+                },
+            ],
         },
         DatosStaff: {
             Integrantes: [
