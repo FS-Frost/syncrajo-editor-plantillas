@@ -63,7 +63,11 @@
             "data:text/plain;charset=utf-8," +
                 encodeURIComponent(plantillaSerializada)
         );
-        element.setAttribute("download", "Plantilla.yaml");
+
+        const categoria = plantilla.DatosTecnicos.Categoria;
+        const proyecto = plantilla.DatosBasicos.Proyecto;
+        const nombre = `[${categoria}] ${proyecto}`;
+        element.setAttribute("download", `${nombre}.yaml`);
         element.click();
     }
 
