@@ -11,6 +11,7 @@ https://fs-frost.github.io/syncrajo-editor-plantillas
 -   [Svelte](https://svelte.dev/)
 -   [TypeScript](https://www.typescriptlang.org/)
 -   [Bulma CSS Framework](https://bulma.io/)
+-   [rollup.js](https://rollupjs.org/)
 
 ## Correr localmente
 
