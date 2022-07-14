@@ -62,7 +62,7 @@ export function newPlantilla(): Plantilla {
         DatosBasicos: {
             Proyecto: "",
             UrlImagen: "",
-            Sinopsis: "No disponible",
+            Sinopsis: "No disponible.",
         },
         DatosDescarga: {
             Botones: [
@@ -100,7 +100,7 @@ export function newPlantilla(): Plantilla {
             Estudio: "",
             FormatosArchivos: "[.AVI 704×396 xVID] [.MP4 1280x720 x264]",
             TamanoArchivos: "[.AVI 180 MB] [.MP4 Peso variable]",
-            HtmlGraficoAvance: "",
+            HtmlGraficoAvance: "-",
         },
     };
     return plantilla;
