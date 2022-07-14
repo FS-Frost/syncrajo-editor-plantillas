@@ -110,22 +110,22 @@ export function newPlantillaEjemplo(): Plantilla {
     const plantilla: Plantilla = {
         DatosBasicos: {
             Proyecto:
-                "Yahari Ore no Seishun Rabu Kome wa Machigatteiru. Zoku",
+                "Sakamichi no Apollon",
             UrlImagen:
-                "http://i1302.photobucket.com/albums/ag138/inazuma_seikatsu/Banners/Yahari%202_zpstxdkzd5i.jpg",
+                "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOjtNbe0KysRGHFwjL3NZF32OvQ70CArrb6AMqnJuf66Pc2-QZvXoNK_EcWRUJqOhPvzXWUyS2tVBNl-FpbFvfOvS-VAVuhnlL4BiqjtnsjU1kNempYsbwUZNIFbNbf50-pJ3rNcAfwZ7e0EO8GH63vkhTUoixjHyP8qWDGpXdXZk3Iw-qFTtCTh3X/s1920/Sakamichi.jpg",
             Sinopsis:
-                "Hikigaya Hachiman es un estudiante de secundaria antisocial sin amigos ni novia y, como resultado, tiene una visión distorsionada de la vida. Cuando ve a sus compañeros hablando animadamente sobre sus vidas de adolescentes, susurra: “Todos son un puñado de mentirosos”. Cuando se le pregunta acerca de sus sueños, responde: “sin trabajar”. Una profesora hace que Hachiman se una al “club de voluntarios”, que casualmente tiene a la chica más bella de la escuela, Yukino Yukinoshita.",
+                "Kaoru Nishimi, un introvertido pianista de música clásica y estudiante de excelencia, acaba de llegar a Kyushu en su primer año de preparatoria. Habiéndose mudado constantemente durante su niñez, ya no guarda esperanza de encajar en este nuevo lugar, preparándose así para otro solitario año sin significado alguno. Al menos ése era el plan, hasta que se topa con el mal rumoreado Sentarou Kawabuchi.\nEl amor desmesurado de Sentarou por el jazz inspira a Kaoru, quien se dispone a conocer más el género y, como resultado, poco a poco empieza a salir de su cascarón, formando su primer lazo de amistado verdadera. Kaoru empieza a tocar el piano durante sus sesiones de jazz al acabar la escuela, ubicados en el sótano de una compañera llamada Ritsuko Mukae, cuya familia trabaja una disquera. En tanto descubre la inmensa dicha de usar su talento musical para alegrar su vida y la del resto, el verano de Kaoru pareciera tornarse en uno que recordará el resto de su vida.\nEsta historia trata amistades que llegan al corazón, música intensa y amor, siguiendo el camino de estos tres jóvenes, unidos por su mutuo aprecio por el jazz.",
         },
         DatosDescarga: {
             Botones: [
                 {
                     Texto: `${prefijoBotonDescarga} MP4`,
-                    Url: "https://mega.co.nz/#F!iMB3AZQB!dw_pm_qhHkenj0EkdW3zpQ",
+                    Url: "https://mega.co.nz/#F!kkAhFBra!OXgRhkctSVNla2xuNISKrQ",
                     Color: BotonDescargaColorDefault,
                 },
                 {
                     Texto: `${prefijoBotonDescarga} AVI`,
-                    Url: "https://mega.co.nz/#F!tpxwkDCS!Gq_0gNRcAEHYlu5Od-xvVg",
+                    Url: "https://mega.co.nz/#F!loolyTDD!Kk8g5FcZ1crP-DJuDwYVHA",
                     Color: BotonDescargaColorDefault,
                 },
             ],
@@ -134,52 +134,56 @@ export function newPlantillaEjemplo(): Plantilla {
             Integrantes: [
                 {
                     Cargo: "Traducción",
-                    Nombre: "[KG] Kurogi (01 al 03), [FS] Frost (04 al 13 + OVA)",
+                    Nombre: "[S2] dmZ",
                 },
                 {
                     Cargo: "Corrección",
-                    Nombre: "[MK] Mikoyan",
+                    Nombre: "[EC] DarkAngel",
                 },
                 {
                     Cargo: "Carteles",
                     Nombre: "[NS] NeoSt",
                 },
                 {
-                    Cargo: "Karaokes y revisión",
-                    Nombre: "[FS] Frost",
-                },
-                {
-                    Cargo: "Compresión AVI",
+                    Cargo: "Carteles",
                     Nombre: "[GX] Gonxas",
                 },
                 {
-                    Cargo: "Compresión MP4",
-                    Nombre: "[SV] Suarez523",
+                    Cargo: "Compresión AVI",
+                    Nombre: "[LS] Losehelin",
                 },
                 {
-                    Cargo: "Latigazos",
-                    Nombre: "[Sr] Duende",
+                    Cargo: "Karaokes",
+                    Nombre: "[FS] Frost",
+                },
+                {
+                    Cargo: "Revisión AVI",
+                    Nombre: "[UM] Ushiromiya",
+                },
+                {
+                    Cargo: "Mirrors",
+                    Nombre: "[KK] Kaito",
                 },
             ],
         },
         DatosTecnicos: {
-            NombreJapones: "やはり俺の青春ラブコメはまちがっている。続",
+            NombreJapones: "坂道のアポロン",
             NombreJaponesRomaji:
-                "Yahari Ore no Seishun Rabu Kome wa Machigatteiru. Zoku",
+                "Sakamichi no Apollon",
             NombreAlternativo:
-                "My Youth Romantic Comedy Is Wrong As I Expected.",
+                "Kids on the Slope",
             NombreAlternativoTraduccion:
-                "Mi comedia romántica juvenil está tan mal como esperaba. La secuela",
-            Categoria: Categoria.SerieBluray,
-            Genero: "Comedia romántica, recuentos de la vida",
-            Episodios: "13 + OVA",
-            Estudio: "Feel",
+                "Niños en la ladera",
+            Categoria: Categoria.Serie,
+            Genero: "Drama, romance, música",
+            Episodios: "12",
+            Estudio: "Tezuka Productions, MAPPA",
             FormatosArchivos:
-                "[.AVI 704×396 xVID] [.MP4 1280x720 x264] [.MP4 1920x1080 x264]",
+                "[.AVI 704x396 xVID] [.MP4 1280x720 x264]",
             TamanoArchivos:
-                "[.AVI 300 MB] [.MP4 720p Peso variable] [.MP4 1080p Peso variable]",
+                "[.AVI 180 MB] [.MP4 245 MB]",
             HtmlGraficoAvance:
-                "<iframe width='600' height='371' seamless frameborder='0' scrolling='no' src='https://docs.google.com/spreadsheets/d/1vdYD1nhj2Xt3Chem1pINDe_Soc_9p8g3ddv9J__NsrI/pubchart?oid=1270762129&amp;format=interactive'></iframe>",
+                "-",
         },
     };
 
