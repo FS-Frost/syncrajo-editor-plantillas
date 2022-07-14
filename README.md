@@ -4,11 +4,14 @@
 
 Editor web para las plantillas de anime de [SyncRajo Fansub](http://www.syncrajo.net/).
 
+https://fs-frost.github.io/syncrajo-editor-plantillas
+
 ## Desarrollado con
 
 -   [Svelte](https://svelte.dev/)
 -   [TypeScript](https://www.typescriptlang.org/)
 -   [Bulma CSS Framework](https://bulma.io/)
+-   [Rollup](https://rollupjs.org/)
 
 ## Correr localmente
 
