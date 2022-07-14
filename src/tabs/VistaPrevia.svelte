@@ -41,11 +41,12 @@
                 </a>
             </div>
             <br />
+
             <!-- Alineando a la izquierda -->
             <div style="text-align: left">
                 <!-- Sinopsis -->
                 <b>Sinopsis:</b>
-                <blockquote class="tr_bq">
+                <blockquote class="tr_bq" style="font: unset !important;">
                     {plantilla.DatosBasicos.Sinopsis}
                 </blockquote>
             </div>
@@ -97,7 +98,7 @@
                         <a href={boton.Url} target="_blank">
                             <button
                                 class="boton"
-                                style="background-color: {boton.Color};color: white;border: 0px;border-radius: 0.2rem;width: 20rem;height: 3rem;font-weight: bold;font-size: 1.2rem;cursor:pointer"
+                                style="background-color: {boton.Color};color: white;border: 0px;border-radius: 0.2rem;width: 20rem;height: 3rem;font-weight: bold;font-size: 1.2rem;cursor:pointer; margin-bottom: 10px"
                                 >{boton.Texto}</button
                             ></a
                         >
@@ -134,7 +135,39 @@
 </div>
 
 <style>
+    blockquote {
+        font: unset !important;
+        margin: 1em 20px;
+        background-color: #f9f9f9;
+        border-color: #cccccc;
+        border-left: 4px solid #cccccc;
+        border-style: dashed dashed dashed solid;
+        border-width: 1px 1px 1px 4px;
+        padding: 10px;
+    }
+
     ul {
+        display: block;
         list-style-type: disc;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 40px;
+    }
+
+    fieldset {
+        display: block;
+        margin-inline-start: 2px;
+        margin-inline-end: 2px;
+        padding-block-start: 0.35em;
+        padding-inline-start: 0.75em;
+        padding-inline-end: 0.75em;
+        padding-block-end: 0.625em;
+        min-inline-size: min-content;
+        border-width: 2px;
+        border-style: groove;
+        border-color: rgb(192, 192, 192);
+        border-image: initial;
     }
 </style>
