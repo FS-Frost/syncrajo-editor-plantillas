@@ -1,10 +1,6 @@
 import { Octokit } from "@octokit/rest";
 import { Base64 } from "js-base64";
 
-const _owner = "FS-Frost";
-const _repo = "github-db1";
-const _pat = "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";
-
 export class GitHub {
     octokit: Octokit;
 
