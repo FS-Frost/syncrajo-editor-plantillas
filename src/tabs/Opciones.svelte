@@ -1,15 +1,33 @@
 <script lang="ts">
     import yaml from "js-yaml";
-    import { newPlantilla, newPlantillaEjemplo, Plantilla } from "../plantilla";
+    import {
+        newPlantilla,
+        newPlantillaEjemplo,
+        Plantilla,
+        validarPlantilla,
+    } from "../plantilla";
+    import ModalDescarga from "./ModalDescarga.svelte";
+    import Swal from "sweetalert2";
+    import { Color } from "../color";
 
     export let plantilla: Plantilla;
     export let divPlantilla: HTMLDivElement | null;
     export let mensajesValidacion: string[];
+    let plantillaSerializada: string = "";
+    let nombrePlantilla: string = "";
+    let modalDescarga: ModalDescarga;
     let fileButton: HTMLInputElement;
     $: esPlantillaValida = mensajesValidacion.length == 0;
 
-    function cargarEjemplo() {
+    async function cargarEjemplo() {
         plantilla = newPlantillaEjemplo();
+
+        await Swal.fire({
+            icon: "success",
+            title: "Ejemplo cargado",
+            confirmButtonText: "Aceptar",
+            confirmButtonColor: Color.Primary,
+        });
     }
 
     async function cargarPlantilla() {
@@ -25,14 +43,30 @@
 
         try {
             plantillaCargada = yaml.load(text) as Plantilla;
+            const errores = validarPlantilla(plantillaCargada);
+            if (errores.length > 0) {
+                throw new Error(
+                    `"Plantilla inválida: ${errores.join("<br><br>")}"`
+                );
+            }
         } catch (error) {
-            console.error(error);
-            alert(`Error al cargar plantilla desde ${file.name}`);
+            await Swal.fire({
+                icon: "error",
+                title: "Error al cargar",
+                html: `Error al cargar plantilla desde ${file.name}<br><br>${error}`,
+                confirmButtonText: "Aceptar",
+                confirmButtonColor: Color.Primary,
+            });
             return;
         }
 
         plantilla = plantillaCargada;
-        // alert("Planilla cargada correctamente");
+        await Swal.fire({
+            icon: "success",
+            title: "Plantilla cargada",
+            confirmButtonText: "Aceptar",
+            confirmButtonColor: Color.Primary,
+        });
     }
 
     function serializarPlantilla(): string {
@@ -43,38 +77,51 @@
         return plantillaSerializada;
     }
 
-    function generarPlantilla() {
+    async function generarPlantilla() {
         if (divPlantilla == null) {
-            alert("La plantilla es inválida");
+            await Swal.fire({
+                icon: "error",
+                title: "Error al generar",
+                text: "La plantilla es inválida",
+                confirmButtonText: "Aceptar",
+                confirmButtonColor: Color.Primary,
+            });
             return;
         }
 
         let html = "<!-- Plantilla generada en Asu -->";
         html += divPlantilla.innerHTML;
         navigator.clipboard.writeText(html);
-        alert("Plantilla HTML copiada al portapapeles");
+        await Swal.fire({
+            icon: "success",
+            title: "Plantilla copiada",
+            text: "Plantilla HTML copiada al portapapeles",
+            confirmButtonText: "Aceptar",
+            confirmButtonColor: Color.Primary,
+        });
     }
 
     function guardarComo() {
-        const plantillaSerializada = serializarPlantilla();
-        let element = document.createElement("a");
-        element.setAttribute(
-            "href",
-            "data:text/plain;charset=utf-8," +
-                encodeURIComponent(plantillaSerializada)
-        );
-
         const categoria = plantilla.DatosTecnicos.Categoria;
         const proyecto = plantilla.DatosBasicos.Proyecto;
-        const nombre = `[${categoria}] ${proyecto}`;
-        element.setAttribute("download", `${nombre}.yaml`);
-        element.click();
+        nombrePlantilla = `[${categoria}] ${proyecto}`;
+        console.log(nombrePlantilla);
+        plantillaSerializada = serializarPlantilla();
+        modalDescarga.open();
+        return;
     }
 
-    function limpiar() {
-        const continuar = confirm("¿Limpiar todos los campos?");
+    async function limpiar() {
+        const swalResult = await Swal.fire({
+            icon: "question",
+            title: "¿Limpiar todos los campos?",
+            showCancelButton: true,
+            confirmButtonText: "Limpiar",
+            cancelButtonText: "Cancelar",
+            confirmButtonColor: Color.Danger,
+        });
 
-        if (continuar) {
+        if (swalResult.isConfirmed) {
             plantilla = newPlantilla();
         }
     }
@@ -87,6 +134,12 @@
         element.click();
     }
 </script>
+
+<ModalDescarga
+    bind:this={modalDescarga}
+    {nombrePlantilla}
+    {plantillaSerializada}
+/>
 
 <div class="opciones">
     <button

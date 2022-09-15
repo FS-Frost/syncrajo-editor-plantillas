@@ -189,3 +189,133 @@ export function newPlantillaEjemplo(): Plantilla {
 
     return plantilla;
 }
+
+export function validarPlantilla(plantilla: Plantilla): string[] {
+    const mensajes: string[] = [];
+
+    if (plantilla == null) {
+        mensajes.push("Plantilla inválida");
+        return mensajes;
+    }
+
+    let seccion = "Datos básicos";
+
+    if (plantilla.DatosBasicos == null) {
+        mensajes.push(`${seccion}: sección indefinida.`);
+        return mensajes;
+    }
+
+    if (plantilla.DatosBasicos.Proyecto == "") {
+        mensajes.push(`${seccion}: Nombre del proyecto no definido.`);
+    }
+
+    if (plantilla.DatosBasicos.UrlImagen == "") {
+        mensajes.push(`${seccion}: URL de imagen no definida.`);
+    }
+
+    if (plantilla.DatosBasicos.Sinopsis == "") {
+        mensajes.push(`${seccion}: Sinopsis no definida.`);
+    }
+
+    if (plantilla.DatosDescarga == null) {
+        mensajes.push(`Datos de descarga: sección indefinida.`);
+        return mensajes;
+    }
+
+    for (let i = 0; i < plantilla.DatosDescarga.Botones.length; i++) {
+        const numeroBoton = i + 1;
+        seccion = `Datos de descarga, botón ${numeroBoton}`;
+        const boton = plantilla.DatosDescarga.Botones[i];
+
+        if (boton.Texto == "") {
+            mensajes.push(`${seccion}: texto no definido.`);
+        }
+
+        if (boton.Url == "") {
+            mensajes.push(`${seccion}: URL no definida.`);
+        }
+
+        if (boton.Color == "") {
+            mensajes.push(`${seccion}: color no definido.`);
+        }
+    }
+
+    seccion = "Datos del staff";
+
+    if (plantilla.DatosStaff == null) {
+        mensajes.push(`${seccion}: sección indefinida.`);
+        return mensajes;
+    }
+
+    if (plantilla.DatosStaff.Integrantes.length == 0) {
+        mensajes.push(`${seccion}: 0 integrantes definidos.`);
+    }
+
+    for (let i = 0; i < plantilla.DatosStaff.Integrantes.length; i++) {
+        const integrante = plantilla.DatosStaff.Integrantes[i];
+        const numIntegrante = i + 1;
+
+        if (integrante.Cargo == "") {
+            mensajes.push(
+                `${seccion}: integrante ${numIntegrante}, cargo no definido.`
+            );
+        }
+
+        if (integrante.Nombre == "") {
+            mensajes.push(
+                `${seccion}: integrante ${numIntegrante}, nombre no definido.`
+            );
+        }
+    }
+
+    seccion = "Datos técnicos";
+
+    if (plantilla.DatosTecnicos == null) {
+        mensajes.push(`${seccion}: sección indefinida.`);
+        return mensajes;
+    }
+
+    if (plantilla.DatosTecnicos.NombreJapones == "") {
+        mensajes.push(`${seccion}: nombre japonés no definido.`);
+    }
+
+    if (plantilla.DatosTecnicos.NombreJaponesRomaji == "") {
+        mensajes.push(`${seccion}: nombre japonés (romaji) no definido.`);
+    }
+
+    if (plantilla.DatosTecnicos.NombreAlternativo == "") {
+        mensajes.push(`${seccion}: nombre alternativo no definido.`);
+    }
+
+    if (plantilla.DatosTecnicos.NombreAlternativoTraduccion == "") {
+        mensajes.push(
+            `${seccion}: nombre alternativo (traducción) no definido.`
+        );
+    }
+
+    if (plantilla.DatosTecnicos.Genero == "") {
+        mensajes.push(`${seccion}: género no definido.`);
+    }
+
+    if (plantilla.DatosTecnicos.Episodios == "") {
+        mensajes.push(`${seccion}: cantidad de episodios no definida.`);
+    }
+
+    if (plantilla.DatosTecnicos.Estudio == "") {
+        mensajes.push(`${seccion}: estudio no definido.`);
+    }
+
+    if (plantilla.DatosTecnicos.FormatosArchivos == "") {
+        mensajes.push(`${seccion}: formatos de archivos no definidos.`);
+    }
+
+    if (plantilla.DatosTecnicos.TamanoArchivos == "") {
+        mensajes.push(`${seccion}: tamaños de archivos no definidos.`);
+    }
+
+    if (plantilla.DatosTecnicos.HtmlGraficoAvance == "") {
+        mensajes.push(`${seccion}: gráfico de avance no definido.`);
+    }
+
+    return mensajes;
+}

@@ -67,3 +67,11 @@ button:focus {
 .text-center {
 	text-align: center;
 }
+
+.select {
+	width: 100%;
+}
+
+.select select {
+	width: 100%;
+}
