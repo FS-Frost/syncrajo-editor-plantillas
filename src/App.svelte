@@ -59,7 +59,7 @@
 
             {#if buildInfo != null}
                 <p class="text-muted text-center">
-                    Version <a href={linkBranch} target="_blank"
+                    Versión <a href={linkBranch} target="_blank"
                         ><b>{buildInfo.ref}</b></a
                     >.<a href={linkCommit} target="_blank"
                         ><b title={buildInfo.sha}>{shortSha}</b></a
