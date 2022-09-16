@@ -59,14 +59,11 @@
 
             {#if buildInfo != null}
                 <p class="text-muted text-center">
-                    Desplegado desde <a href={linkBranch} target="_blank"
+                    Version <a href={linkBranch} target="_blank"
                         ><b>{buildInfo.ref}</b></a
-                    >
-                    con la versión
-                    <a href={linkCommit} target="_blank"
+                    >.<a href={linkCommit} target="_blank"
                         ><b title={buildInfo.sha}>{shortSha}</b></a
-                    >
-                    por
+                    >, desplegada por
                     <a href={linkActor} target="_blank"
                         ><b>{buildInfo.actor}</b></a
                     >
