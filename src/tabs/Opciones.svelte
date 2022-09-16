@@ -9,15 +9,20 @@
     import ModalDescarga from "./ModalDescarga.svelte";
     import Swal from "sweetalert2";
     import { Color } from "../color";
+    import ModalAbrir from "./ModalAbrir.svelte";
 
     export let plantilla: Plantilla;
     export let divPlantilla: HTMLDivElement | null;
     export let mensajesValidacion: string[];
     let plantillaSerializada: string = "";
     let nombrePlantilla: string = "";
+    let modalAbrir: ModalAbrir;
     let modalDescarga: ModalDescarga;
-    let fileButton: HTMLInputElement;
     $: esPlantillaValida = mensajesValidacion.length == 0;
+
+    async function abrirPlantilla() {
+        modalAbrir.open();
+    }
 
     async function cargarEjemplo() {
         plantilla = newPlantillaEjemplo();
@@ -30,8 +35,8 @@
         });
     }
 
-    async function cargarPlantilla() {
-        const files = fileButton.files;
+    async function cargarPlantilla(fileInput: HTMLInputElement) {
+        const files = fileInput.files;
 
         if (files == null || files.length == 0) {
             return;
@@ -61,6 +66,7 @@
         }
 
         plantilla = plantillaCargada;
+        modalAbrir.close();
         await Swal.fire({
             icon: "success",
             title: "Plantilla cargada",
@@ -133,7 +139,46 @@
         element.setAttribute("target", "_blank");
         element.click();
     }
+
+    async function handleFileLoaded(e: CustomEvent<string>) {
+        const text = e.detail;
+        let plantillaCargada: Plantilla;
+
+        try {
+            plantillaCargada = yaml.load(text) as Plantilla;
+            const errores = validarPlantilla(plantillaCargada);
+            if (errores.length > 0) {
+                throw new Error(
+                    `"Plantilla inválida: ${errores.join("<br><br>")}"`
+                );
+            }
+        } catch (error) {
+            await Swal.fire({
+                icon: "error",
+                title: "Error al cargar",
+                html: `Error al cargar plantilla desde GitHub.<br><br>${error}`,
+                confirmButtonText: "Aceptar",
+                confirmButtonColor: Color.Primary,
+            });
+            return;
+        }
+
+        plantilla = plantillaCargada;
+        modalAbrir.close();
+        await Swal.fire({
+            icon: "success",
+            title: "Plantilla cargada",
+            confirmButtonText: "Aceptar",
+            confirmButtonColor: Color.Primary,
+        });
+    }
 </script>
+
+<ModalAbrir
+    bind:this={modalAbrir}
+    {cargarPlantilla}
+    on:fileLoaded={handleFileLoaded}
+/>
 
 <ModalDescarga
     bind:this={modalDescarga}
@@ -152,15 +197,8 @@
     <button
         class="button is-info"
         title="Abrir plantilla local"
-        on:click={() => fileButton.click()}>Abrir</button
+        on:click={() => abrirPlantilla()}>Abrir</button
     >
-    <input
-        class="is-hidden"
-        bind:this={fileButton}
-        type="file"
-        accept=".yaml,.yml"
-        on:change={() => cargarPlantilla()}
-    />
 
     <button
         class="button is-info"

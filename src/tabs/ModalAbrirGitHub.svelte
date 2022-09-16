@@ -4,30 +4,40 @@
     import { GitHub } from "../github";
     import _ from "lodash";
     import Swal from "sweetalert2";
-    import { prevent_default, text } from "svelte/internal";
     import { Color } from "../color";
+    import { decode } from "js-base64";
+
+    interface GitHubFile {
+        name: string;
+        sha: string;
+        size: number;
+        type: string;
+    }
 
     const KEY_REMEMBER = "remember";
     const KEY_TOKEN = "pat";
     const KEY_REPO = "repo";
+    const KEY_SHA = "sha";
     const dispatch = createEventDispatcher();
-    export let nombrePlantilla: string = "";
-    export let plantillaSerializada: string = "";
     let modal: Modal;
     let token: string = "";
     let rememberSettings: boolean;
     let repos: string[] = [];
+    let files: GitHubFile[] = [];
     let owner: string = "";
     let selectedRepo: string = "";
-    let filePath: string = "";
+    let selectedSha: string = "";
     let debouncedTokenChanged = _.debounce(tokenChanged, 1000);
     let github: GitHub;
     let isOpen = false;
 
     $: token, debouncedTokenChanged();
-    $: saveButtonIsDisabled =
-        repos.length == 0 || selectedRepo?.length == 0 || filePath?.length == 0;
-    $: rememberSettings, selectedRepo, saveSettings();
+    $: openButtonIsDisabled =
+        repos.length == 0 ||
+        selectedRepo?.length == 0 ||
+        selectedSha?.length == 0;
+    $: rememberSettings, selectedRepo, selectedSha, saveSettings();
+    $: selectedRepo, onSelectedRepo();
 
     async function tokenChanged() {
         if (!isOpen) {
@@ -65,7 +75,6 @@
                 selectedRepo = savedRepo;
             }
 
-            filePath = `${nombrePlantilla}.yml`;
             saveSettings();
         } catch (error) {
             if (Swal.isVisible()) {
@@ -107,74 +116,16 @@
         if (selectedRepo?.length > 0) {
             localStorage.setItem(KEY_REPO, selectedRepo);
         }
+
+        if (selectedSha?.length > 0) {
+            localStorage.setItem(KEY_SHA, selectedSha);
+        }
     }
 
     function deleteSettings() {
         localStorage.removeItem(KEY_TOKEN);
         localStorage.removeItem(KEY_REPO);
-    }
-
-    async function save() {
-        try {
-            github = GitHub.new(token);
-            const user = await github.getUser();
-
-            try {
-                await github.getContent(user.login, selectedRepo, filePath);
-            } catch (error) {
-                console.info("El archivo no existe", error);
-            }
-
-            let swalResult = await Swal.fire({
-                icon: "question",
-                title: "El archivo ya existe",
-                text: "¿Sobrescribir?",
-                showCancelButton: true,
-                confirmButtonText: "Sobrescribir",
-                cancelButtonText: "Cancelar",
-                confirmButtonColor: Color.Danger,
-            });
-
-            if (!swalResult.isConfirmed) {
-                return;
-            }
-
-            Swal.fire({
-                icon: "info",
-                title: "Guardando en GitHub",
-                didOpen: () => {
-                    Swal.showLoading();
-                },
-            });
-
-            const responseCreateCommit = await github.createCommit(
-                user.login,
-                selectedRepo,
-                filePath,
-                plantillaSerializada
-            );
-
-            if (!responseCreateCommit.status) {
-                throw new Error("Error al guardar en GitHub");
-            }
-
-            await Swal.fire({
-                icon: "success",
-                title: "Guardado",
-                confirmButtonText: "Aceptar",
-                confirmButtonColor: Color.Primary,
-            });
-
-            dispatch("fileSaved");
-        } catch (error) {
-            await Swal.fire({
-                icon: "error",
-                title: "Error al guardar",
-                text: `Error: ${error}`,
-                confirmButtonText: "Aceptar",
-                confirmButtonColor: Color.Primary,
-            });
-        }
+        localStorage.removeItem(KEY_SHA);
     }
 
     export function reset() {
@@ -219,15 +170,64 @@
 
         rememberSettings = swalResult.isConfirmed;
     }
+
+    async function onSelectedRepo() {
+        if (selectedRepo?.length == 0) {
+            return;
+        }
+
+        const user = await github.getUser();
+        const responseListFiles = await github.listFiles(
+            user.login,
+            selectedRepo
+        );
+
+        if (Array.isArray(responseListFiles.data)) {
+            files = [
+                ...responseListFiles.data.filter((f) => f.type == "dir"),
+                ...responseListFiles.data.filter(
+                    (f) =>
+                        f.type == "file" &&
+                        (f.name.endsWith(".yml") || f.name.endsWith(".yaml"))
+                ),
+            ];
+
+            const savedSha = localStorage.getItem(KEY_SHA);
+            if (
+                rememberSettings &&
+                savedSha != null &&
+                files.find((f) => f.sha == savedSha)
+            ) {
+                selectedSha = savedSha;
+            }
+        }
+    }
+
+    async function openFile() {
+        const user = await github.getUser();
+        const responseGetContent = await github.getBlob(
+            user.login,
+            selectedRepo,
+            selectedSha
+        );
+
+        if (!responseGetContent?.content) {
+            console.error("no content");
+            return;
+        }
+
+        const decodedContent = decode(responseGetContent.content);
+        dispatch<string>("fileLoaded", decodedContent);
+    }
 </script>
 
 <Modal
     bind:this={modal}
     title="Guardar en GitHub"
-    acceptButtonText="Guardar"
+    acceptButtonText="Abrir"
     cancelButtonText="Cerrar"
-    bind:acceptButtonDisabled={saveButtonIsDisabled}
-    accept={() => save()}
+    bind:acceptButtonDisabled={openButtonIsDisabled}
+    accept={() => openFile()}
     on:open={() => dispatch(modal.EVENT_OPEN)}
     on:close={() => dispatch(modal.EVENT_CLOSE)}
 >
@@ -275,14 +275,15 @@
 
     {#if selectedRepo.length > 0}
         <div class="field">
-            <label class="label" for="">Ruta de guardado</label>
+            <label class="label" for="">Archivos</label>
             <div class="control">
-                <input
-                    class="input"
-                    type="text"
-                    bind:value={filePath}
-                    placeholder="carpeta/subcarpeta/Superplantilla.yml"
-                />
+                <div class="select">
+                    <select bind:value={selectedSha}>
+                        {#each files as file}
+                            <option value={file.sha}>{file.name}</option>
+                        {/each}
+                    </select>
+                </div>
             </div>
         </div>
     {/if}

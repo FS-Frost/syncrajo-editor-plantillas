@@ -28,6 +28,11 @@
         element.setAttribute("download", `${nombrePlantilla}.yaml`);
         element.click();
     }
+
+    function handleFileSaved() {
+        modalGitHub.close();
+        close();
+    }
 </script>
 
 <ModalDescargaGitHub
@@ -35,6 +40,7 @@
     {nombrePlantilla}
     {plantillaSerializada}
     on:close={() => open()}
+    on:fileSaved={() => handleFileSaved()}
 />
 
 <Modal
