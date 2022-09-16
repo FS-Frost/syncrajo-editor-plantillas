@@ -25,6 +25,20 @@
     }
 
     async function cargarEjemplo() {
+        const swalResult = await Swal.fire({
+            icon: "question",
+            title: "¿Cargar plantilla de ejemplo?",
+            text: "Se perderán los cambios actuales",
+            showCancelButton: true,
+            confirmButtonText: "Cargar ejemplo",
+            cancelButtonText: "Cancelar",
+            confirmButtonColor: Color.Primary,
+        });
+
+        if (!swalResult.isConfirmed) {
+            return;
+        }
+
         plantilla = newPlantillaEjemplo();
 
         await Swal.fire({
@@ -189,20 +203,20 @@
 <div class="opciones">
     <button
         class="button is-info"
-        title="Generar el código HTML y lo copia al portapapeles"
+        title="Generar el código HTML y copiarlo al portapapeles"
         disabled={!esPlantillaValida}
         on:click={() => generarPlantilla()}>Generar</button
     >
 
     <button
         class="button is-info"
-        title="Abrir plantilla local"
+        title="Abrir plantilla"
         on:click={() => abrirPlantilla()}>Abrir</button
     >
 
     <button
         class="button is-info"
-        title="Guardar plantilla en formato YAML"
+        title="Guardar plantilla"
         disabled={!esPlantillaValida}
         on:click={() => guardarComo()}>Guardar</button
     >
@@ -215,7 +229,7 @@
 
     <button
         class="button is-danger"
-        title="Reiniciar todos los campos"
+        title="Vaciar todos los campos"
         on:click={() => limpiar()}>Limpiar</button
     >
 
