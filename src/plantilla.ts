@@ -1,59 +1,77 @@
+import { z } from "zod";
+
 const prefijoBotonDescarga = "Carpeta en MEGA";
 
-export interface Plantilla {
-    DatosBasicos: DatosBasicos;
-    DatosDescarga: DatosDescarga;
-    DatosStaff: DatosStaff;
-    DatosTecnicos: DatosTecnicos;
-}
+const DatosBasicos = z.object({
+    Proyecto: z.string(),
+    UrlImagen: z.string(),
+    Sinopsis: z.string(),
+});
 
-export interface DatosBasicos {
-    Proyecto: string;
-    UrlImagen: string;
-    Sinopsis: string;
-}
+export type DatosBasicos = z.infer<typeof DatosBasicos>;
 
 export const BotonDescargaColorDefault = "#df5228";
 
-export interface BotonDescarga {
-    Texto: string;
-    Url: string;
-    Color: string;
-}
+const BotonDescarga = z.object({
+    Texto: z.string(),
+    Url: z.string(),
+    Color: z.string(),
+});
 
-export interface DatosDescarga {
-    Botones: BotonDescarga[];
-}
+export type BotonDescarga = z.infer<typeof BotonDescarga>;
 
-export interface Integrante {
-    Cargo: string;
-    Nombre: string;
-}
+const DatosDescarga = z.object({
+    Botones: BotonDescarga.array(),
+});
 
-export interface DatosStaff {
-    Integrantes: Integrante[];
-}
+export type DatosDescarga = z.infer<typeof DatosDescarga>;
 
-export enum Categoria {
-    Serie = "Serie",
-    SerieBluray = "Serie Blu-ray",
-    Ova = "OVA",
-    Pelicula = "Película",
-}
+const Integrante = z.object({
+    Cargo: z.string(),
+    Nombre: z.string(),
+});
 
-export interface DatosTecnicos {
-    NombreJapones: string;
-    NombreJaponesRomaji: string;
-    NombreAlternativo: string;
-    NombreAlternativoTraduccion: string;
-    Categoria: Categoria;
-    Genero: string;
-    Episodios: string;
-    Estudio: string;
-    FormatosArchivos: string;
-    TamanoArchivos: string;
-    HtmlGraficoAvance: string;
-}
+export type Integrante = z.infer<typeof Integrante>;
+
+const DatosStaff = z.object({
+    Integrantes: Integrante.array(),
+});
+
+export type DatosStaff = z.infer<typeof DatosStaff>;
+
+export const Categoria = z.enum([
+    "Serie",
+    "Serie Blu-ray",
+    "OVA",
+    "Película",
+]);
+
+export type Categoria = z.infer<typeof Categoria>;
+
+const DatosTecnicos = z.object({
+    NombreJapones: z.string(),
+    NombreJaponesRomaji: z.string(),
+    NombreAlternativo: z.string(),
+    NombreAlternativoTraduccion: z.string(),
+    Categoria: Categoria,
+    Genero: z.string(),
+    Episodios: z.string(),
+    Estudio: z.string(),
+    FormatosArchivos: z.string(),
+    TamanoArchivos: z.string(),
+    HtmlGraficoAvance: z.string(),
+});
+
+export type DatosTecnicos = z.infer<typeof DatosTecnicos>;
+
+export const Plantilla = z.object({
+    DatosBasicos: DatosBasicos,
+    DatosDescarga: DatosDescarga,
+    DatosStaff: DatosStaff,
+    DatosTecnicos: DatosTecnicos,
+});
+
+export type Plantilla = z.infer<typeof Plantilla>;
 
 export function newPlantilla(): Plantilla {
     const cargos = ["Traducción", "Corrección", "Carteles", "Karaokes", "Compresión MP4", "Compresión AVI"];
@@ -94,7 +112,7 @@ export function newPlantilla(): Plantilla {
             NombreJaponesRomaji: "",
             NombreAlternativo: "",
             NombreAlternativoTraduccion: "",
-            Categoria: Categoria.Serie,
+            Categoria: Categoria.enum.Serie,
             Genero: "",
             Episodios: "1",
             Estudio: "",
@@ -174,7 +192,7 @@ export function newPlantillaEjemplo(): Plantilla {
                 "Kids on the Slope",
             NombreAlternativoTraduccion:
                 "Niños en la ladera",
-            Categoria: Categoria.Serie,
+            Categoria: Categoria.Enum.Serie,
             Genero: "Drama, romance, música",
             Episodios: "12",
             Estudio: "Tezuka Productions, MAPPA",

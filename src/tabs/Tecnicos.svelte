@@ -56,13 +56,17 @@
         <div class="control">
             <div class="select is-fullwidth">
                 <select bind:value={datos.Categoria}>
-                    <option value={Categoria.Serie}>{Categoria.Serie}</option>
-                    <option value={Categoria.SerieBluray}
-                        >{Categoria.SerieBluray}</option
+                    <option value={Categoria.Enum.Serie}
+                        >{Categoria.Enum.Serie}</option
                     >
-                    <option value={Categoria.Ova}>{Categoria.Ova}</option>
-                    <option value={Categoria.Pelicula}
-                        >{Categoria.Pelicula}</option
+                    <option value={Categoria.Enum["Serie Blu-ray"]}
+                        >{Categoria.Enum["Serie Blu-ray"]}</option
+                    >
+                    <option value={Categoria.Enum.OVA}
+                        >{Categoria.Enum.OVA}</option
+                    >
+                    <option value={Categoria.Enum.Película}
+                        >{Categoria.Enum.Película}</option
                     >
                 </select>
             </div>

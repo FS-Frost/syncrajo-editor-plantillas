@@ -62,10 +62,26 @@
 
         try {
             plantillaCargada = yaml.load(text) as Plantilla;
+            const validation = Plantilla.safeParse(plantillaCargada);
+
+            if (!validation.success) {
+                let errorMessage = "";
+
+                validation.error.errors.forEach((error) => {
+                    const msg = `${error.path.join(".")}: ${error.code}: ${
+                        error.message
+                    }`;
+
+                    errorMessage += `<br>${msg}`;
+                });
+
+                throw new Error(`Plantilla inválida: ${errorMessage}`);
+            }
+
             const errores = validarPlantilla(plantillaCargada);
             if (errores.length > 0) {
                 throw new Error(
-                    `"Plantilla inválida: ${errores.join("<br><br>")}"`
+                    `Plantilla inválida: ${errores.join("<br><br>")}`
                 );
             }
         } catch (error) {
@@ -160,10 +176,26 @@
 
         try {
             plantillaCargada = yaml.load(text) as Plantilla;
+            const validation = Plantilla.safeParse(plantillaCargada);
+
+            if (!validation.success) {
+                let errorMessage = "";
+
+                validation.error.errors.forEach((error) => {
+                    const msg = `${error.path.join(".")}: ${error.code}: ${
+                        error.message
+                    }`;
+
+                    errorMessage += `<br>${msg}`;
+                });
+
+                throw new Error(`Plantilla inválida: ${errorMessage}`);
+            }
+
             const errores = validarPlantilla(plantillaCargada);
             if (errores.length > 0) {
                 throw new Error(
-                    `"Plantilla inválida: ${errores.join("<br><br>")}"`
+                    `Plantilla inválida: ${errores.join("<br><br>")}`
                 );
             }
         } catch (error) {
