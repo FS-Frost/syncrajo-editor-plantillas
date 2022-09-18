@@ -10,6 +10,7 @@ https://fs-frost.github.io/syncrajo-editor-plantillas
 
 -   [Svelte](https://svelte.dev/) `(Framework Web UI)`
 -   [TypeScript](https://www.typescriptlang.org/) `(Lenguaje principal)`
+-   [octokit](https://github.com/octokit/octokit.js) `(GitHub SDK)`
 -   [Zod](https://github.com/colinhacks/zod) `(Validador de esquemas)`
 -   [Bulma](https://bulma.io/) `(Framework CSS)`
 -   [Rollup](https://rollupjs.org/) `(Empaquetador de JS)`
