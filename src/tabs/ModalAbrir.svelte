@@ -5,7 +5,6 @@
 
     const dispatch = createEventDispatcher();
     const dispatchString = createEventDispatcher<{ fileLoaded: string }>();
-    export let cargarPlantilla: (fileInput: HTMLInputElement) => void;
     let modal: Modal;
     let fileButton: HTMLInputElement;
     let modalGitHub: ModalAbrirGitHub;
@@ -27,6 +26,18 @@
         modalGitHub.close();
         dispatchString("fileLoaded", e.detail);
     }
+
+    async function onFileInputChange() {
+        const files = fileButton.files;
+
+        if (files == null || files.length == 0) {
+            return;
+        }
+
+        const file = files[0];
+        const text = await file.text();
+        dispatchString("fileLoaded", text);
+    }
 </script>
 
 <ModalAbrirGitHub
@@ -40,7 +51,7 @@
     bind:this={fileButton}
     type="file"
     accept=".yaml,.yml"
-    on:change={() => cargarPlantilla(fileButton)}
+    on:change={() => onFileInputChange()}
 />
 
 <Modal

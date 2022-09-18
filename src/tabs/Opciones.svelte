@@ -49,62 +49,6 @@
         });
     }
 
-    async function cargarPlantilla(fileInput: HTMLInputElement) {
-        const files = fileInput.files;
-
-        if (files == null || files.length == 0) {
-            return;
-        }
-
-        const file = files[0];
-        const text = await file.text();
-        let plantillaCargada: Plantilla;
-
-        try {
-            plantillaCargada = yaml.load(text) as Plantilla;
-            const validation = Plantilla.safeParse(plantillaCargada);
-
-            if (!validation.success) {
-                let errorMessage = "";
-
-                validation.error.errors.forEach((error) => {
-                    const msg = `${error.path.join(".")}: ${error.code}: ${
-                        error.message
-                    }`;
-
-                    errorMessage += `<br>${msg}`;
-                });
-
-                throw new Error(`Plantilla inválida: ${errorMessage}`);
-            }
-
-            const errores = validarPlantilla(plantillaCargada);
-            if (errores.length > 0) {
-                throw new Error(
-                    `Plantilla inválida: ${errores.join("<br><br>")}`
-                );
-            }
-        } catch (error) {
-            await Swal.fire({
-                icon: "error",
-                title: "Error al cargar",
-                html: `Error al cargar plantilla desde ${file.name}<br><br>${error}`,
-                confirmButtonText: "Aceptar",
-                confirmButtonColor: Color.Primary,
-            });
-            return;
-        }
-
-        plantilla = plantillaCargada;
-        modalAbrir.close();
-        await Swal.fire({
-            icon: "success",
-            title: "Plantilla cargada",
-            confirmButtonText: "Aceptar",
-            confirmButtonColor: Color.Primary,
-        });
-    }
-
     function serializarPlantilla(): string {
         const plantillaSerializada = yaml.dump(plantilla, {
             indent: 2,
@@ -220,11 +164,7 @@
     }
 </script>
 
-<ModalAbrir
-    bind:this={modalAbrir}
-    {cargarPlantilla}
-    on:fileLoaded={handleFileLoaded}
-/>
+<ModalAbrir bind:this={modalAbrir} on:fileLoaded={handleFileLoaded} />
 
 <ModalDescarga
     bind:this={modalDescarga}
