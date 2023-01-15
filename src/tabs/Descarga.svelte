@@ -99,6 +99,7 @@
                         ? `: "${boton.Texto}"`
                         : ''}"
                     on:click={() => subirBoton(index)}
+                    disabled={index <= 0}
                 >
                     <span class="icon">
                         <i class="fa-solid fa-arrow-up" />
@@ -112,6 +113,7 @@
                         ? `: "${boton.Texto}"`
                         : ''}"
                     on:click={() => bajarBoton(index)}
+                    disabled={index >= datos.Botones.length - 1}
                 >
                     <span class="icon">
                         <i class="fa-solid fa-arrow-down" />
