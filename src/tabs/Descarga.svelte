@@ -28,10 +28,30 @@
         indexBotonActivo = -1;
     }
 
-    function quitarBoton(indexQuitar: number) {
-        datos.Botones = datos.Botones.filter(
-            (_, index) => index != indexQuitar
-        );
+    function quitarBoton(indexBoton: number) {
+        datos.Botones = datos.Botones.filter((_, index) => index != indexBoton);
+    }
+
+    function moverBoton(currentIndex: number, newIndex: number) {
+        if (newIndex < 0 || newIndex >= datos.Botones.length) {
+            return;
+        }
+
+        const boton = datos.Botones[currentIndex];
+        datos.Botones.splice(currentIndex, 1);
+        datos.Botones.splice(newIndex, 0, boton);
+        datos.Botones = [...datos.Botones];
+        // alternatBoton(newIndex);
+    }
+
+    function subirBoton(indexBoton: number) {
+        const newIndex = indexBoton - 1;
+        moverBoton(indexBoton, newIndex);
+    }
+
+    function bajarBoton(indexBoton: number) {
+        const newIndex = indexBoton + 1;
+        moverBoton(indexBoton, newIndex);
     }
 </script>
 
@@ -50,32 +70,59 @@
     </div>
 
     {#each datos.Botones as boton, index}
-        <!-- Cabecera -->
-        <p
-            class="cabecera-boton"
-            title={indexBotonActivo == index ? "Ocultar" : "Mostrar"}
-            on:click={() => alternatBoton(index)}
-        >
-            {index + 1}. {boton.Texto == "" ? "[Sin texto]" : boton.Texto}
-        </p>
+        <div class="cabecera">
+            <div class="mt-1 mr-1">
+                <!-- Subir -->
+                <button
+                    class="button is-primary is-small"
+                    title="Subir este botón{boton.Texto != ''
+                        ? `: "${boton.Texto}"`
+                        : ''}"
+                    on:click={() => subirBoton(index)}
+                >
+                    <span class="icon">
+                        <i class="fa-solid fa-arrow-up" />
+                    </span>
+                </button>
+
+                <!-- Bajar -->
+                <button
+                    class="button is-primary is-small"
+                    title="Subir este botón{boton.Texto != ''
+                        ? `: "${boton.Texto}"`
+                        : ''}"
+                    on:click={() => bajarBoton(index)}
+                >
+                    <span class="icon">
+                        <i class="fa-solid fa-arrow-down" />
+                    </span>
+                </button>
+
+                <!-- Quitar -->
+                <button
+                    class="button is-danger is-small"
+                    title="Quitar este botón{boton.Texto != ''
+                        ? `: "${boton.Texto}"`
+                        : ''}"
+                    on:click={() => quitarBoton(index)}
+                >
+                    <span class="icon">
+                        <i class="fa-solid fa-xmark" />
+                    </span>
+                </button>
+            </div>
+
+            <p
+                class="cabecera-boton"
+                title={indexBotonActivo == index ? "Ocultar" : "Mostrar"}
+                on:click={() => alternatBoton(index)}
+            >
+                {index + 1}. {boton.Texto == "" ? "[Sin texto]" : boton.Texto}
+            </p>
+        </div>
 
         {#if indexBotonActivo == index}
             <div class="cuerpo-boton">
-                <!-- Quitar -->
-                <div class="mt-1">
-                    <button
-                        class="button is-danger is-small"
-                        title="Quitar este botón{boton.Texto != ''
-                            ? `: "${boton.Texto}"`
-                            : ''}"
-                        on:click={() => quitarBoton(index)}
-                    >
-                        <span class="icon">
-                            <i class="fa-solid fa-xmark" />
-                        </span>
-                    </button>
-                </div>
-
                 <!-- Texto -->
                 <div class="field">
                     <label class="label" for="">Texto</label>
@@ -118,11 +165,16 @@
 </div>
 
 <style>
+    .cabecera {
+        display: flex;
+    }
+
     .cabecera-boton {
         font-size: medium;
         font-weight: bold;
         cursor: pointer;
         border-radius: 0.3rem;
+        padding-top: 0.4rem;
     }
 
     .cabecera-boton:hover {
@@ -130,6 +182,6 @@
     }
 
     .cuerpo-boton {
-        margin-left: 1rem;
+        /* margin-left: 1rem; */
     }
 </style>
