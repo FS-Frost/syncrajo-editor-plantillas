@@ -58,7 +58,10 @@
         datos.Botones.splice(currentIndex, 1);
         datos.Botones.splice(newIndex, 0, boton);
         datos.Botones = [...datos.Botones];
-        // alternatBoton(newIndex);
+
+        if (indexBotonActivo == currentIndex) {
+            alternatBoton(newIndex);
+        }
     }
 
     function subirBoton(indexBoton: number) {
