@@ -105,7 +105,12 @@ export async function getAccessToken(): Promise<string> {
         return token;
     }
 
-    const redirectUrl = `${document.location.protocol}//${document.location.host}${document.location.pathname}`;
+    let redirectUrl = `${document.location.protocol}//${document.location.host}${document.location.pathname}`;
+
+    if (redirectUrl.endsWith("/")) {
+        redirectUrl = redirectUrl.substring(0, redirectUrl.length - 1);
+    }
+
     const url = `https://accounts.google.com/o/oauth2/auth?response_type=token&state=&client_id=897770756068-9idjsioh9ejl72vi8fn4vddlnpva7kle.apps.googleusercontent.com&scope=https://www.googleapis.com/auth/blogger&redirect_uri=${redirectUrl}`;
 
     const a = document.createElement("a");
