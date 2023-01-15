@@ -1,4 +1,6 @@
 <script lang="ts">
+    import Swal from "sweetalert2";
+    import { Color } from "../color";
     import {
         BotonDescarga,
         BotonDescargaColorDefault,
@@ -28,7 +30,22 @@
         indexBotonActivo = -1;
     }
 
-    function quitarBoton(indexBoton: number) {
+    async function quitarBoton(indexBoton: number) {
+        const boton = datos.Botones[indexBoton];
+        const result = await Swal.fire({
+            title: `¿Quitar botón '${boton.Texto}'?`,
+            text: "Este cambio es irreversible.",
+            icon: "question",
+            confirmButtonText: "Quitar",
+            cancelButtonText: "Cancelar",
+            showCancelButton: true,
+            confirmButtonColor: Color.Danger,
+        });
+
+        if (!result.isConfirmed) {
+            return;
+        }
+
         datos.Botones = datos.Botones.filter((_, index) => index != indexBoton);
     }
 
