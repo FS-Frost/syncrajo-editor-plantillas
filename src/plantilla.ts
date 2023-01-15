@@ -6,6 +6,7 @@ const DatosBasicos = z.object({
     Proyecto: z.string(),
     UrlImagen: z.string(),
     Sinopsis: z.string(),
+    UrlBlogger: z.string().default(""),
 });
 
 export type DatosBasicos = z.infer<typeof DatosBasicos>;
@@ -81,6 +82,7 @@ export function newPlantilla(): Plantilla {
             Proyecto: "",
             UrlImagen: "",
             Sinopsis: "No disponible.",
+            UrlBlogger: "",
         },
         DatosDescarga: {
             Botones: [
@@ -133,6 +135,7 @@ export function newPlantillaEjemplo(): Plantilla {
                 "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOjtNbe0KysRGHFwjL3NZF32OvQ70CArrb6AMqnJuf66Pc2-QZvXoNK_EcWRUJqOhPvzXWUyS2tVBNl-FpbFvfOvS-VAVuhnlL4BiqjtnsjU1kNempYsbwUZNIFbNbf50-pJ3rNcAfwZ7e0EO8GH63vkhTUoixjHyP8qWDGpXdXZk3Iw-qFTtCTh3X/s1920/Sakamichi.jpg",
             Sinopsis:
                 "Kaoru Nishimi, un introvertido pianista de música clásica y estudiante de excelencia, acaba de llegar a Kyushu en su primer año de preparatoria. Habiéndose mudado constantemente durante su niñez, ya no guarda esperanza de encajar en este nuevo lugar, preparándose así para otro solitario año sin significado alguno. Al menos ése era el plan, hasta que se topa con el mal rumoreado Sentarou Kawabuchi.\nEl amor desmesurado de Sentarou por el jazz inspira a Kaoru, quien se dispone a conocer más el género y, como resultado, poco a poco empieza a salir de su cascarón, formando su primer lazo de amistado verdadera. Kaoru empieza a tocar el piano durante sus sesiones de jazz al acabar la escuela, ubicados en el sótano de una compañera llamada Ritsuko Mukae, cuya familia trabaja una disquera. En tanto descubre la inmensa dicha de usar su talento musical para alegrar su vida y la del resto, el verano de Kaoru pareciera tornarse en uno que recordará el resto de su vida.\nEsta historia trata amistades que llegan al corazón, música intensa y amor, siguiendo el camino de estos tres jóvenes, unidos por su mutuo aprecio por el jazz.",
+            UrlBlogger: "http://www.syncrajo.net/2014/03/sakamichi-no-apollon.html",
         },
         DatosDescarga: {
             Botones: [

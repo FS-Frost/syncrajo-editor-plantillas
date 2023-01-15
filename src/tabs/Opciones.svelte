@@ -10,6 +10,7 @@
     import Swal from "sweetalert2";
     import { Color } from "../color";
     import ModalAbrir from "./ModalAbrir.svelte";
+    import ModalBlogger from "./blogger/ModalBlogger.svelte";
 
     export let plantilla: Plantilla;
     export let divPlantilla: HTMLDivElement | null;
@@ -18,6 +19,7 @@
     let nombrePlantilla: string = "";
     let modalAbrir: ModalAbrir;
     let modalDescarga: ModalDescarga;
+    let modalBlogger: ModalBlogger;
     $: esPlantillaValida = mensajesValidacion.length == 0;
 
     async function abrirPlantilla() {
@@ -162,6 +164,10 @@
             confirmButtonColor: Color.Primary,
         });
     }
+
+    async function publicarEnBlogger() {
+        modalBlogger.open();
+    }
 </script>
 
 <ModalAbrir bind:this={modalAbrir} on:fileLoaded={handleFileLoaded} />
@@ -171,6 +177,8 @@
     {nombrePlantilla}
     {plantillaSerializada}
 />
+
+<ModalBlogger bind:this={modalBlogger} bind:plantilla bind:divPlantilla />
 
 <div class="opciones">
     <button
@@ -210,6 +218,13 @@
         title="Ver una plantilla ya desplegada como HTML"
         on:click={() => verPlantillaDesplegada()}
         >Ver una plantilla en SyncRajo</button
+    >
+
+    <button
+        class="button is-info"
+        title="Publicar HTML en Blogger"
+        disabled={!esPlantillaValida}
+        on:click={() => publicarEnBlogger()}>Publicar en Blogger</button
     >
 </div>
 

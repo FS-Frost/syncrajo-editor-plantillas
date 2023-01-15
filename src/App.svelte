@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
-
+    import { TOKEN_NAME } from "./blogger";
+    import Cache from "./cache";
     import Editor from "./Editor.svelte";
 
     const urlFansub = "http://www.syncrajo.net/";
@@ -39,8 +40,30 @@
         buildInfo = info;
     }
 
+    function checkAccessToken() {
+        const url = document.location.href;
+        const exp = `access_token=(?<token>[^&]*).*expires_in=(?<secondsToExpire>\\d+)`;
+        const regex = new RegExp(exp);
+        const result = regex.exec(url);
+
+        if (!result?.groups) {
+            return;
+        }
+
+        const token = result.groups["token"] ?? "";
+        const secondsToExpire = Number.parseInt(
+            result.groups["secondsToExpire"]
+        );
+
+        if (token.length > 0) {
+            Cache.set(TOKEN_NAME, token, secondsToExpire);
+            window.close();
+        }
+    }
+
     onMount(() => {
         loadBuildInfo();
+        checkAccessToken();
     });
 </script>
 

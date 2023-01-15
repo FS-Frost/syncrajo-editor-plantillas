@@ -28,6 +28,14 @@
             <textarea class="textarea" bind:value={datos.Sinopsis} />
         </div>
     </div>
+
+    <!-- URL de Blogger -->
+    <div class="field">
+        <label class="label" for="">URL de Blogger</label>
+        <div class="control">
+            <input class="input" type="text" bind:value={datos.UrlBlogger} />
+        </div>
+    </div>
 </div>
 
 <style>
