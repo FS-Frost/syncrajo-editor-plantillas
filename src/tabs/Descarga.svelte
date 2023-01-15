@@ -180,8 +180,4 @@
     .cabecera-boton:hover {
         background-color: rgb(241, 241, 241);
     }
-
-    .cuerpo-boton {
-        /* margin-left: 1rem; */
-    }
 </style>
