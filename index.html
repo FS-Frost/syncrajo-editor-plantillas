@@ -1,59 +1,104 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+	<meta charset="utf-8" />
 
-    <title>Editor de plantillas</title>
+	<link rel="icon" href="./favicon.png" />
 
-    <base href="/syncrajo-editor-plantillas/" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="manifest" href="manifest.json" />
-    <link rel="stylesheet" href="global.css" />
-    <link rel="stylesheet" href="build/bundle.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="js/fork-me-baby.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <script defer src="build/bundle.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<script type="module">
+		import { Octokit } from "https://esm.sh/@octokit/rest";
+		window.Octokit = Octokit;
+	</script>
+
+	<script src="js/fork-me-baby.min.js"></script>
+
+	
+		<link href="./_app/immutable/assets/0.BImPYGyV.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/2.Dfkji52I.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.BA7cU_o5.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/Cpp-sxUp.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/d_1-Ln9h.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/Cx_1M_Vc.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/O29DNXLF.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.Dn1quT3q.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/COaahgpz.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/DFyR7mY7.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/DXYJvCJw.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.CYgNGcfl.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/DC9JTzqP.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.CidLUCC3.js">
 </head>
 
-<body>
-    <script>
-        forkMeBaby({
-            position: "top-right",
-            link: "https://github.com/FS-Frost/syncrajo-editor-plantillas",
-            sticky: false,
-        });
+<body data-sveltekit-preload-data="hover">
+	<div style="display: contents"><!--[--><!--[--><!----><div class="app svelte-1xwd6fg"><main class="svelte-1xwd6fg"><!----><!----><section class="svelte-u22agc"><!--[--><main class="svelte-s4iysm"><div class="editor svelte-13yjodx"><h1 class="title svelte-13yjodx">Editor de plantillas</h1> <div class="modal"><div class="modal-background"></div> <div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">GitHub</p> <button class="delete" aria-label="close"></button></header> <section class="modal-card-body"><!--[--><div class="field"><label class="label" for="">Personal Access Token</label> <div class="control"><input class="input" type="password" value=""></div></div> <div class="field"><label class="checkbox"><input type="checkbox"> Recuérdame</label></div> <!--[!--><!--]--> <!--[!--><!--]--> <!--[!--><!--]--><!----><!--]--></section> <footer class="modal-card-foot"><button class="button">Cerrar</button> <!--[--><button class="button is-success" disabled>Abrir</button><!--]--></footer></div></div><!----> <input class="is-hidden" type="file" accept=".json"> <div class="modal"><div class="modal-background"></div> <div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Abrir</p> <button class="delete" aria-label="close"></button></header> <section class="modal-card-body"><!--[--><p class="mb-3">Seleccione desde dónde abrir la plantilla:</p> <div class="buttons"><button class="button is-info" title="Desde este equipo">Local</button> <button class="button is-info" title="Desde GitHub">GitHub</button></div><!----><!--]--></section> <footer class="modal-card-foot"><button class="button">Cerrar</button> <!--[!--><!--]--></footer></div></div><!----><!----> <div class="modal"><div class="modal-background"></div> <div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Guardar en GitHub</p> <button class="delete" aria-label="close"></button></header> <section class="modal-card-body"><!--[--><div class="field"><label class="label" for="">Planilla</label> <div class="control"><input class="input" type="text" value="" readonly></div></div> <div class="field"><label class="label" for="">Personal Access Token</label> <div class="control"><input class="input" type="password" value=""></div></div> <div class="field"><label class="checkbox"><input type="checkbox"> Recuérdame</label></div> <!--[!--><!--]--> <!--[!--><!--]--> <!--[!--><!--]--><!----><!--]--></section> <footer class="modal-card-foot"><button class="button">Cerrar</button> <!--[--><button class="button is-success" disabled>Guardar</button><!--]--></footer></div></div><!----> <div class="modal"><div class="modal-background"></div> <div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Guardar</p> <button class="delete" aria-label="close"></button></header> <section class="modal-card-body"><!--[--><p class="mb-3">Seleccione dónde guardar la plantilla :</p> <div class="buttons"><button class="button is-info" title="Guardar en este equipo">Local</button> <button class="button is-info" title="Guardar en GitHub">GitHub</button></div><!----><!--]--></section> <footer class="modal-card-foot"><button class="button">Cerrar</button> <!--[!--><!--]--></footer></div></div><!----><!----> <div class="modal"><div class="modal-background"></div> <div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Publicar en Blogger</p> <button class="delete" aria-label="close"></button></header> <section class="modal-card-body"><!--[--><div class="field"><label class="label" for="">URL de Blogger</label> <div class="control"><input class="input" type="text" value="http://www.syncrajo.net/2014/03/sakamichi-no-apollon.html"></div></div> <div class="buttons"><button class="button is-info" title="Desde este equipo">Publicar</button></div><!----><!--]--></section> <footer class="modal-card-foot"><button class="button">Cerrar</button> <!--[!--><!--]--></footer></div></div><!----> <div class="opciones svelte-obsv3c"><button class="button is-info" title="Generar el código HTML y copiarlo al portapapeles">Generar</button> <button class="button is-info" title="Abrir plantilla">Abrir</button> <button class="button is-info" title="Guardar plantilla">Guardar</button> <button class="button is-info" title="Cargar plantilla de ejemplo">Cargar ejemplo</button> <button class="button is-danger" title="Vaciar todos los campos">Limpiar</button> <button class="button is-info" title="Ver una plantilla ya desplegada como HTML">Ver una plantilla en SyncRajo</button> <button class="button is-info" title="Publicar HTML en Blogger">Publicar en Blogger</button></div><!----> <div class="tabs is-centered"><ul><!--[--><li class="is-active svelte-13yjodx"><a href="#datos básicos">Datos básicos</a></li><li class=" svelte-13yjodx"><a href="#descarga">Descarga</a></li><li class=" svelte-13yjodx"><a href="#staff">Staff</a></li><li class=" svelte-13yjodx"><a href="#datos técnicos">Datos técnicos</a></li><li class=" svelte-13yjodx"><a href="#vista previa">Vista previa</a></li><!--]--></ul></div> <div class="columns"><div class="column is-6 mr-3" style="max-height: 100vh; overflow: auto;"><!--[--><div class="editor"><div class="field"><label class="label" for="">Proyecto</label> <div class="control"><input class="input" type="text" value="Sakamichi no Apollon"></div></div> <div class="field"><label class="label" for="">Imagen</label> <div class="control"><input class="input" type="text" value="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOjtNbe0KysRGHFwjL3NZF32OvQ70CArrb6AMqnJuf66Pc2-QZvXoNK_EcWRUJqOhPvzXWUyS2tVBNl-FpbFvfOvS-VAVuhnlL4BiqjtnsjU1kNempYsbwUZNIFbNbf50-pJ3rNcAfwZ7e0EO8GH63vkhTUoixjHyP8qWDGpXdXZk3Iw-qFTtCTh3X/s1920/Sakamichi.jpg"></div></div> <div class="field"><label class="label" for="">Sinopsis</label> <div class="control"><textarea class="textarea">Kaoru Nishimi, un introvertido pianista de música clásica y estudiante de excelencia, acaba de llegar a Kyushu en su primer año de preparatoria. Habiéndose mudado constantemente durante su niñez, ya no guarda esperanza de encajar en este nuevo lugar, preparándose así para otro solitario año sin significado alguno. Al menos ése era el plan, hasta que se topa con el mal rumoreado Sentarou Kawabuchi.
+El amor desmesurado de Sentarou por el jazz inspira a Kaoru, quien se dispone a conocer más el género y, como resultado, poco a poco empieza a salir de su cascarón, formando su primer lazo de amistado verdadera. Kaoru empieza a tocar el piano durante sus sesiones de jazz al acabar la escuela, ubicados en el sótano de una compañera llamada Ritsuko Mukae, cuya familia trabaja una disquera. En tanto descubre la inmensa dicha de usar su talento musical para alegrar su vida y la del resto, el verano de Kaoru pareciera tornarse en uno que recordará el resto de su vida.
+Esta historia trata amistades que llegan al corazón, música intensa y amor, siguiendo el camino de estos tres jóvenes, unidos por su mutuo aprecio por el jazz.</textarea></div></div> <div class="field"><label class="label" for="">URL de Blogger</label> <div class="control"><input class="input" type="text" value="http://www.syncrajo.net/2014/03/sakamichi-no-apollon.html"></div></div></div><!--]--></div> <div class="column is-6"><div style="max-height: 100vh; overflow: auto;"><div><!--[--><!--]--></div> <div><div style="font-family: Arial, Helvetica, sans-serif; text-align: left"><div class="separator" style="clear: both; text-align: center"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOjtNbe0KysRGHFwjL3NZF32OvQ70CArrb6AMqnJuf66Pc2-QZvXoNK_EcWRUJqOhPvzXWUyS2tVBNl-FpbFvfOvS-VAVuhnlL4BiqjtnsjU1kNempYsbwUZNIFbNbf50-pJ3rNcAfwZ7e0EO8GH63vkhTUoixjHyP8qWDGpXdXZk3Iw-qFTtCTh3X/s1920/Sakamichi.jpg" target="_blank"><img alt="" width="640" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOjtNbe0KysRGHFwjL3NZF32OvQ70CArrb6AMqnJuf66Pc2-QZvXoNK_EcWRUJqOhPvzXWUyS2tVBNl-FpbFvfOvS-VAVuhnlL4BiqjtnsjU1kNempYsbwUZNIFbNbf50-pJ3rNcAfwZ7e0EO8GH63vkhTUoixjHyP8qWDGpXdXZk3Iw-qFTtCTh3X/s1920/Sakamichi.jpg"></a></div> <br> <div style="text-align: left"><b>Sinopsis:</b> <blockquote class="tr_bq svelte-a1lq9g" style="font: unset !important;">Kaoru Nishimi, un introvertido pianista de música clásica y estudiante de excelencia, acaba de llegar a Kyushu en su primer año de preparatoria. Habiéndose mudado constantemente durante su niñez, ya no guarda esperanza de encajar en este nuevo lugar, preparándose así para otro solitario año sin significado alguno. Al menos ése era el plan, hasta que se topa con el mal rumoreado Sentarou Kawabuchi.
+El amor desmesurado de Sentarou por el jazz inspira a Kaoru, quien se dispone a conocer más el género y, como resultado, poco a poco empieza a salir de su cascarón, formando su primer lazo de amistado verdadera. Kaoru empieza a tocar el piano durante sus sesiones de jazz al acabar la escuela, ubicados en el sótano de una compañera llamada Ritsuko Mukae, cuya familia trabaja una disquera. En tanto descubre la inmensa dicha de usar su talento musical para alegrar su vida y la del resto, el verano de Kaoru pareciera tornarse en uno que recordará el resto de su vida.
+Esta historia trata amistades que llegan al corazón, música intensa y amor, siguiendo el camino de estos tres jóvenes, unidos por su mutuo aprecio por el jazz.</blockquote></div> <div><fieldset class="svelte-a1lq9g"><legend><b>Datos Técnicos</b></legend> <br> <b>Nombre Japonés:</b><span class="t_nihongo_kanji" lang="ja">坂道のアポロン</span> <i>Sakamichi no Apollon</i> <br> <b>Nombres Alternativos:</b>Kids on the Slope <i>Niños en la ladera</i> <br> <b>Categoría:</b>Serie <br> <b>Género:</b>Drama, romance, música <br> <b>Episodios:</b>12 <br> <b>Producción:</b>Tezuka Productions, MAPPA <br> <b>Idioma:</b>Japonés (subtitulos en español) <br> <b>Códec y formato de video:</b>[.AVI 704x396 xVID] [.MP4 1280x720 x264] <br> <b>Tamaño capítulos:</b>[.AVI 180 MB] [.MP4 245 MB]</fieldset> <br></div> <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;"><!--[--><div style="display: flex; flex-direction: row;"><a href="https://mega.co.nz/#F!kkAhFBra!OXgRhkctSVNla2xuNISKrQ" target="_blank"><button class="boton" style="background-color: #df5228;color: white;border: 0px;border-radius: 0.2rem;width: 20rem;height: 3rem;font-weight: bold;font-size: 1.2rem;cursor:pointer; margin-bottom: 10px">Carpeta en MEGA MP4</button></a></div><div style="display: flex; flex-direction: row;"><a href="https://mega.co.nz/#F!loolyTDD!Kk8g5FcZ1crP-DJuDwYVHA" target="_blank"><button class="boton" style="background-color: #df5228;color: white;border: 0px;border-radius: 0.2rem;width: 20rem;height: 3rem;font-weight: bold;font-size: 1.2rem;cursor:pointer; margin-bottom: 10px">Carpeta en MEGA AVI</button></a></div><!--]--></div> <div style="text-align: left"><fieldset class="svelte-a1lq9g"><legend><b>Staff del proyecto</b></legend> <ul class="svelte-a1lq9g"><!--[--><li>Traducción: [S2] dmZ</li><li>Corrección: [EC] DarkAngel</li><li>Carteles: [NS] NeoSt</li><li>Carteles: [GX] Gonxas</li><li>Compresión AVI: [LS] Losehelin</li><li>Karaokes: [FS] Frost</li><li>Revisión AVI: [UM] Ushiromiya</li><li>Mirrors: [KK] Kaito</li><!--]--></ul></fieldset></div> <div style="text-align: left"><br> <fieldset class="svelte-a1lq9g"><legend><b>Estado de avance</b></legend> <div></div></fieldset></div></div></div></div><!----></div></div></div><!----> <div class="bottom svelte-s4iysm"><div class="container"><p class="text-muted text-center"><a href="http://www.syncrajo.net/" target="_blank">Visítanos en SyncRajo Fansub</a></p> <!--[--><p class="text-muted text-center">Versión <a href="https://github.com/FS-Frost/syncrajo-editor-plantillas/tree/" target="_blank"><b></b></a>.<a href="https://github.com/FS-Frost/syncrajo-editor-plantillas/commit/" target="_blank"><b title=""></b></a>, desplegada por <a href="https://github.com/" target="_blank"><b></b></a></p><!--]--></div></div></main><!--]--><!----></section><!----><!----></main></div><!----><!--]--> <!--[!--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_toqh77 = {
+						base: new URL(".", location).pathname.slice(0, -1)
+					};
 
-        if ("serviceWorker" in navigator) {
-            window.addEventListener("load", function () {
-                navigator.serviceWorker
-                    .register("worker.js")
-                    .then(
-                        function (registration) {
-                            console.log("Worker registration successful", registration.scope);
-                        },
-                        function (err) {
-                            console.log("Worker registration failed", err);
-                        }
-                    )
-                    .catch(function (err) {
-                        console.log(err);
-                    });
-            });
-        } else {
-            console.log("Service Worker is not supported by browser.");
-        }
-    </script>
+					const element = document.currentScript.parentElement;
 
-    <style>
-        .fork-me-baby.top-right:before {
-            border-right-color: #302a7a !important;
-        }
-    </style>
+					Promise.all([
+						import("./_app/immutable/entry/start.BA7cU_o5.js"),
+						import("./_app/immutable/entry/app.Dn1quT3q.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2],
+							data: [null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+
+	<script>
+		forkMeBaby({
+			position: "top-right",
+			link: "https://github.com/FS-Frost/syncrajo-editor-plantillas",
+			sticky: false,
+		});
+
+		if ("serviceWorker" in navigator) {
+			window.addEventListener("load", function () {
+				navigator.serviceWorker
+					.register("worker.js")
+					.then(
+						function (registration) {
+							console.log("Worker registration successful", registration.scope);
+						},
+						function (err) {
+							console.log("Worker registration failed", err);
+						}
+					)
+					.catch(function (err) {
+						console.log(err);
+					});
+			});
+		} else {
+			console.log("Service Worker is not supported by browser.");
+		}
+	</script>
+
+	<style>
+		.fork-me-baby.top-right:before {
+			border-right-color: #302a7a !important;
+		}
+	</style>
 </body>
 
 </html>
